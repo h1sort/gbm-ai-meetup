@@ -52,3 +52,4 @@ Add a dated line here whenever a publish turns up something new.
 - 2026-10-01 · First mount. All routes worked as expected under `wrangler dev` with no surprises. Added `customPages` to the sitemap and a `llms.txt` entry. Converted the OG image from an 805 KB PNG to a 96 KB JPEG.
 - 2026-10-01 · Speaker asked that the live site not show the control bar or the notes. Added `public.mjs` (strips notes, sets `data-public`). The deck now has a public mode.
 - 2026-10-01 · Merged PR #18 (`4b53757`), deployed 15:14:51Z (`ea469eb5`). Live `/gbm-ai/` is byte-identical to `main`. Both earlier PR-branch pushes had already deployed to production (15:07, 15:11), so the route was live before the merge.
+- 2026-10-01 · Refresh to 97f38f9 via PR #19 (`9a63b3b`). Branch push deployed at 23:04:40Z and the merge at 23:05:27Z. Live is byte-identical to `main`: 19 slides, no notes, no control bar. The smoke-test selector for the footer link is now `.bottomline .deck-link`.
