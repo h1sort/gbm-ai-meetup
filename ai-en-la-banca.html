@@ -106,12 +106,15 @@
   .topline .mark{display:inline-flex;align-items:center;gap:.7em}
   .topline .mark i{width:.55em;height:.55em;border:1.5px solid var(--slide-accent,var(--evidence));transform:rotate(45deg)}
   .bottomline{padding-top:.45rem}
-  .bottomline .url{color:var(--ink-2);text-decoration:none;letter-spacing:.12em;text-transform:none}
-  .bottomline .url:hover{color:var(--slide-accent,var(--evidence))}
-  @media (max-width:640px){.bottomline .who{display:none}}
+  .bottomline .find{display:inline-flex;align-items:center;gap:.75em;text-transform:none;letter-spacing:.12em}
+  .bottomline .find a{color:var(--ink-2);text-decoration:none;display:inline-flex;align-items:center}
+  .bottomline .find a:hover{color:var(--slide-accent,var(--evidence))}
+  .bottomline .find svg{width:1.05em;height:1.05em;fill:currentColor}
+  .bottomline .find .handle{color:var(--ink-2)}
+  @media (max-width:640px){.bottomline .who,.bottomline .find .sep{display:none}.bottomline .find{gap:.6em;letter-spacing:.04em}}
   .folio{font-variant-numeric:tabular-nums}
   .slide.bare .topline,.slide.bare .bottomline{visibility:hidden}
-  .slide.bare .bottomline .url{visibility:visible}
+  .slide.bare .bottomline .find{visibility:visible}
 
   /* ---------- layout primitives ---------- */
   .main{min-height:0;display:flex;flex-direction:column;justify-content:center;gap:var(--gap);padding:clamp(.5rem,2vh,1.6rem) 0}
@@ -418,6 +421,31 @@ html[data-still] .s04 .row{animation:none!important}
 @media (prefers-reduced-motion:reduce){.s04.active .row{animation:none}}
 @media (max-width:760px){.s04 .motif{inset:auto 0 0 0;height:40%;width:100%;opacity:.7}.s04 .col{max-width:none}.s04 .main{justify-content:flex-start}}
 
+/* --- 01-04.html --- */
+.s04b .main{justify-content:center;gap:clamp(.8rem,2.6vh,2rem)}
+.s04b .eyebrow{font-weight:600;letter-spacing:.14em;text-transform:none}
+.s04b .eyebrow::before{display:none}
+.s04b .eyebrow span{border-bottom:2px solid currentColor;padding-bottom:.35em}
+.s04b h2{font-size:clamp(2.6rem,7vw,7.4rem);max-width:none;line-height:.95}
+.s04b dl{display:grid;grid-template-columns:minmax(7rem,14rem) minmax(0,1fr);gap:clamp(.55rem,2.1vh,1.5rem) clamp(1rem,3vw,3rem);margin:0;align-items:baseline}
+.s04b dt{font-family:var(--f-mono);font-size:var(--t-label);letter-spacing:.16em;text-transform:uppercase;color:var(--ink-dim)}
+.s04b dd{margin:0;font-size:clamp(1.05rem,2vw,2.1rem);line-height:1.2;color:var(--ink)}
+.s04b dd a{color:inherit;text-decoration:none;border-bottom:2px solid var(--action);padding-bottom:.05em}
+.s04b .takes{border-left:3px solid var(--action);padding-left:clamp(.8rem,1.6vw,1.6rem);display:flex;flex-direction:column;gap:clamp(.3rem,1vh,.7rem)}
+.s04b .takes p{margin:0}
+.s04b .old{position:relative;width:fit-content;transition:color .5s var(--ease) .4s}
+.s04b .old:has(.scratch.shown){color:var(--ink-dim)}
+.s04b .scratch{position:absolute;left:-2%;top:0;width:104%;height:100%;overflow:visible;pointer-events:none;clip-path:inset(-50% 100% -50% 0)}
+.s04b .scratch path{fill:none;stroke:var(--action);stroke-width:3;stroke-linecap:round;stroke-linejoin:round;vector-effect:non-scaling-stroke}
+.s04b .scratch.shown{clip-path:inset(-50% 0 -50% 0);transition:opacity .2s linear,clip-path .7s cubic-bezier(.5,0,.3,1)}
+.s04b .old + .old .scratch.shown{transition-delay:.45s}
+.s04b .new{font-weight:600}
+.s04b .new em{font-style:normal;color:var(--action)}
+@media (prefers-reduced-motion:reduce){.s04b .scratch{clip-path:none!important}}
+html[data-still] .s04b .scratch,html.no-js .s04b .scratch{clip-path:none!important}
+@media (max-width:760px){.s04b dl{grid-template-columns:1fr;gap:.2rem}.s04b dd{margin-bottom:.6rem}
+  .s04b .scratch{display:none}.s04b .old:has(.scratch.shown){text-decoration:line-through 2px var(--action)}}
+
 /* --- 05-08.html --- */
 /* ===== shared by the four history slides (s05–s08): one map, viewBox 0 -10 1100 460 ===== */
 .s05 .main,.s06 .main,.s07 .main,.s08 .main{gap:clamp(.4rem,1.4vh,1.1rem)}
@@ -604,7 +632,7 @@ html[data-still] .s04 .row{animation:none!important}
         <circle class="pt" cx="120" cy="263" r="4.2"/><circle class="pt" cx="137" cy="315" r="4.6"/><circle class="pt" cx="311" cy="266" r="4.9"/><circle class="pt" cx="224" cy="235" r="5.9"/><circle class="pt" cx="172" cy="255" r="5.4"/><circle class="pt" cx="426" cy="255" r="3.3"/><circle class="pt" cx="201" cy="299" r="5.4"/><circle class="pt" cx="415" cy="209" r="3.8"/><circle class="pt" cx="475" cy="248" r="6.6"/>
           <circle class="pt" cx="127" cy="417" r="6.2"/><circle class="pt" cx="471" cy="364" r="3.7"/><circle class="pt" cx="416" cy="446" r="5.9"/><circle class="pt" cx="490" cy="427" r="4.7"/><circle class="pt" cx="214" cy="404" r="3.1"/><circle class="pt" cx="250" cy="436" r="3"/><circle class="pt" cx="366" cy="446" r="5.2"/><circle class="pt" cx="371" cy="391" r="6.4"/><circle class="pt" cx="420" cy="391" r="3.9"/>
           <circle class="pt" cx="138" cy="454" r="6.3"/><circle class="pt" cx="160" cy="491" r="5.2"/><circle class="pt" cx="259" cy="507" r="3.4"/><circle class="pt" cx="332" cy="516" r="6.7"/><circle class="pt" cx="156" cy="569" r="7"/><circle class="pt" cx="406" cy="518" r="4.5"/><circle class="pt" cx="476" cy="519" r="6.6"/><circle class="pt" cx="227" cy="550" r="4.5"/><circle class="pt" cx="308" cy="477" r="3.4"/>
-        <path class="lead draw" pathLength="1" d="M483,248 L520,255.7"/><path class="lead draw" pathLength="1" d="M498,427 L520,414.05"/><path class="lead draw" pathLength="1" d="M484,519 L520,515.85"/>
+        <path class="lead draw" d="M483,248 L520,255.7"/><path class="lead draw" d="M498,427 L520,414.05"/><path class="lead draw" d="M484,519 L520,515.85"/>
       </g>
       <rect class="gate" x="548" y="150" width="24" height="480" rx="2"/><rect class="slot" x="548" y="248" width="24" height="44"/><path class="slotbar" d="M551,270 H569"/><rect class="slot" x="548" y="368" width="24" height="44"/><path class="slotbar" d="M551,390 H569"/><rect class="slot" x="548" y="488" width="24" height="44"/><path class="slotbar" d="M551,510 H569"/>
       <circle class="node ghost" cx="650" cy="270" r="17"/><circle class="node ghost" cx="650" cy="390" r="17"/><circle class="node ghost" cx="650" cy="510" r="17"/>
@@ -619,7 +647,7 @@ html[data-still] .s04 .row{animation:none!important}
   </div>
   <aside class="notes">
     <p><strong>Propósito:</strong> fijar que esta es una charla sobre la economía cambiante del análisis y los sistemas institucionales para usarlo. La imagen ya anuncia el argumento: datos dispersos frente a una frontera que todavía no deja pasar nada de forma gobernada. Sin biografía, sin agenda, sin logos.</p>
-    <p><strong>Tiempo:</strong> 0:00–0:20 (0:20). Presentarse en una frase: Carlos Haro (“Charlie”), AI Engineer. Marco: enseñanza pública, no producto.</p>
+    <p><strong>Tiempo:</strong> 0:00–0:20 (0:20). Presentarse en una frase: Carlos Haro (“Charlie”), AI Engineer; la presentación con humor llega en la diapositiva 5. Marco: enseñanza pública, no producto.</p>
     <blockquote>Buenas tardes. Voy a empezar con algo que no es una diapositiva: vamos a crear datos entre todos, ahora mismo.</blockquote>
     <p class="warn">Antes de la charla: abrir el grupo de la encuesta (los seis polls) en h1sort.com/polls; el grupo no tiene respuestas todavía y nunca se muestran resultados históricos de la Clase 1 como esta sala. No mencionar horario ni fecha de la charla (no confirmados). El subtítulo es subordinado, no está bloqueado.</p>
     <p><strong>Transición:</strong> “Saquen el teléfono.”</p>
@@ -738,12 +766,42 @@ No muestres identificadores ni respuestas individuales. Resume sin inferir causa
     <p><strong>Tiempo:</strong> 4:30–5:00 (0:30).</p>
     <blockquote>Todavía falta saber si relacionó correctamente las respuestas y qué denominador utilizó. Una respuesta rápida no resuelve esas preguntas por sí sola.</blockquote>
     <p class="warn">No auditar el resultado a fondo aquí; solo sembrar join y denominador. No presentar el resultado de la demo como validado.</p>
+    <p><strong>Transición:</strong> “Antes de seguir: ¿quién les está contando todo esto?”</p>
+  </aside>
+</section>
+<!-- ============ 04b · ¿QUIÉN ES ESTE TIPO? ============ -->
+
+<section class="slide s04b" data-title="¿Quién es este tipo?" data-section="Apertura" data-budget="0:45" data-clock="5:00–5:45" style="--slide-accent:var(--action)">
+  <div class="main">
+    <p class="eyebrow reveal d1"><span>¿quién_es_este_tipo?</span></p>
+    <h2 class="reveal d1">Carlos <em>Haro</em></h2>
+    <dl class="reveal d2">
+      <dt>Actualmente</dt><dd>Sr. AI Engineer en Banco Santander</dd>
+      <dt>Antes</dt><dd>casi 10 años lidiando con datos</dd>
+      <dt>LinkedIn</dt><dd><a href="https://www.linkedin.com/in/h1sort" target="_blank" rel="noopener">h1sort</a></dd>
+      <dt>Amo_X</dt><dd><a href="https://x.com/h1sort" target="_blank" rel="noopener">h1sort</a></dd>
+      <dt>Sitio web</dt><dd><a href="https://h1sort.com" target="_blank" rel="noopener">h1sort.com</a></dd>
+      <dt>Hot takes</dt>
+      <dd class="takes">
+        <p class="old">pandas es una pésima librería para el análisis de datos<svg class="scratch" data-step="1" viewBox="0 0 100 10" preserveAspectRatio="none" aria-hidden="true"><path d="M0,6.2 C18,4.6 33,6.8 51,5.2 S82,4.4 100,5.6"/><path d="M99,3.6 C80,6.4 62,3.4 44,6.6 S14,4.2 1,7.4"/></svg></p>
+        <p class="old">los perros son mejores que los gatos<svg class="scratch" data-step="1" viewBox="0 0 100 10" preserveAspectRatio="none" aria-hidden="true"><path d="M0,5.8 C20,4.4 38,6.9 57,5 S86,4.6 100,6"/><path d="M100,3.8 C78,6.6 55,3.6 36,6.4 S12,4.4 0,7"/></svg></p>
+        <p class="new" data-step="2"><em>Santos Laguna</em> es el mejor equipo de futbol de la historia</p>
+      </dd>
+    </dl>
+  </div>
+  <aside class="notes">
+    <p><strong>Propósito:</strong> presentarse con humor después de la demo, cuando la sala ya vio qué hace uno. Romper el hielo antes de la historia. No vender currículum.</p>
+    <p><strong>Tiempo:</strong> 5:00–5:45 (0:45).</p>
+    <p>Paso 1 (→): se tachan las dos opiniones viejas. Paso 2 (→): aparece la nueva.</p>
+    <blockquote>Normalmente digo que pandas es una pésima librería para el análisis de datos… y que los perros son mejores que los gatos. Pero ya no lo voy a decir.</blockquote>
+    <blockquote>Mi nueva opinión impopular: Santos Laguna es el mejor equipo de futbol de la historia.</blockquote>
+    <p class="warn">Es un chiste; no detenerse a defenderlo. Mencionar @h1sort (X y LinkedIn) una vez: está en el pie de cada diapositiva junto con h1sort.com/gbm-ai.</p>
     <p><strong>Transición:</strong> “Hoy podemos formular esa pregunta y obtener el análisis casi inmediatamente. No siempre pudimos hacerlo. Cada generación del stack eliminó una limitación distinta.”</p>
   </aside>
 </section>
 
 <!-- ===== 05-08.html ===== -->
-<section class="slide s05" data-title="~2013: la pregunta cabía en el negocio" data-section="Historia" data-budget="1:00" data-clock="5:00–6:00" style="--slide-accent:var(--action)">
+<section class="slide s05" data-title="~2013: la pregunta cabía en el negocio" data-section="Historia" data-budget="1:00" data-clock="5:45–6:45" style="--slide-accent:var(--action)">
   <div class="main">
     <div class="hd">
       <div class="hdl"><p class="eyebrow reveal">Cuatro fases aproximadas · ~2013</p><h2 class="reveal d1">La pregunta cabía en el negocio, <em>no en el stack.</em></h2></div>
@@ -785,7 +843,7 @@ No muestres identificadores ni respuestas individuales. Resume sin inferir causa
     <p><strong>Transición:</strong> “Con los años, la infraestructura cambió qué tanto del negocio podíamos observar.”</p>
   </aside>
 </section>
-<section class="slide s06" data-title="~2016: observar más del negocio" data-section="Historia" data-budget="1:00" data-clock="6:00–7:00" style="--slide-accent:var(--evidence)">
+<section class="slide s06" data-title="~2016: observar más del negocio" data-section="Historia" data-budget="1:00" data-clock="6:45–7:45" style="--slide-accent:var(--evidence)">
   <div class="main">
     <div class="hd">
       <div class="hdl"><p class="eyebrow reveal">~2016</p><h2 class="reveal d1">Podemos observar <em>más del negocio.</em></h2></div>
@@ -816,7 +874,7 @@ No muestres identificadores ni respuestas individuales. Resume sin inferir causa
     <p><strong>Transición:</strong> “Y una vez que podíamos ver más, la siguiente pregunta fue: ¿podemos hacer algo con lo que vemos?”</p>
   </aside>
 </section>
-<section class="slide s07" data-title="~2020: de observar a operar" data-section="Historia" data-budget="1:00" data-clock="7:00–8:00" style="--slide-accent:var(--evidence)">
+<section class="slide s07" data-title="~2020: de observar a operar" data-section="Historia" data-budget="1:00" data-clock="7:45–8:45" style="--slide-accent:var(--evidence)">
   <div class="main">
     <div class="hd">
       <div class="hdl"><p class="eyebrow reveal">~2020</p><h2 class="reveal d1">De observar <em>a operar.</em></h2></div>
@@ -848,7 +906,7 @@ No muestres identificadores ni respuestas individuales. Resume sin inferir causa
     <p><strong>Transición:</strong> “Y entonces llegó 2026.”</p>
   </aside>
 </section>
-<section class="slide s08" data-title="~2026: la respuesta abunda" data-section="Historia" data-budget="1:00" data-clock="8:00–9:00" style="--slide-accent:var(--warm-ink)">
+<section class="slide s08" data-title="~2026: la respuesta abunda" data-section="Historia" data-budget="1:00" data-clock="8:45–9:45" style="--slide-accent:var(--warm-ink)">
   <div class="main">
     <div class="hd">
       <div class="hdl"><p class="eyebrow reveal">~2026</p><h2 class="reveal d1">La respuesta abunda. El <em>criterio</em> sigue siendo escaso.</h2></div>
@@ -900,7 +958,7 @@ No muestres identificadores ni respuestas individuales. Resume sin inferir causa
 
 <!-- ===== 09-12.html ===== -->
 <!-- ============================ 09 ============================ -->
-<section class="slide s09" data-title="Una definición útil de agente" data-section="Agentes" data-budget="1:00" data-clock="9:00–10:00" style="--slide-accent:var(--warm-ink)">
+<section class="slide s09" data-title="Una definición útil de agente" data-section="Agentes" data-budget="1:00" data-clock="9:45–10:45" style="--slide-accent:var(--warm-ink)">
   <div class="main">
     <p class="eyebrow reveal">Una definición operativa</p>
     <div class="split">
@@ -944,7 +1002,7 @@ No muestres identificadores ni respuestas individuales. Resume sin inferir causa
 </section>
 
 <!-- ============================ 10 ============================ -->
-<section class="slide s10" data-title="El modelo propone. La aplicación ejecuta." data-section="Agentes" data-budget="1:30" data-clock="10:00–11:30" style="--slide-accent:var(--action)">
+<section class="slide s10" data-title="El modelo propone. La aplicación ejecuta." data-section="Agentes" data-budget="1:30" data-clock="10:45–12:15" style="--slide-accent:var(--action)">
   <div class="main">
     <div class="hd">
       <p class="eyebrow reveal">La frontera</p>
@@ -1016,7 +1074,7 @@ No muestres identificadores ni respuestas individuales. Resume sin inferir causa
 </section>
 
 <!-- ============================ 11 ============================ -->
-<section class="slide s11" data-title="Una solicitud todavía no es una acción" data-section="Agentes" data-budget="2:30" data-clock="11:30–14:00" style="--slide-accent:var(--action)">
+<section class="slide s11" data-title="Una solicitud todavía no es una acción" data-section="Agentes" data-budget="2:30" data-clock="12:15–14:45" style="--slide-accent:var(--action)">
   <div class="main">
     <div class="hd">
       <p class="eyebrow reveal"><span class="tag live" style="margin-left:0">Demo en vivo</span></p>
@@ -1092,7 +1150,7 @@ No muestres identificadores ni respuestas individuales. Resume sin inferir causa
 </section>
 
 <!-- ============================ 12 ============================ -->
-<section class="slide s12" data-title="Dos lugares distintos para la IA" data-section="Agentes" data-budget="1:00" data-clock="14:00–15:00" style="--slide-accent:var(--warm-ink)">
+<section class="slide s12" data-title="Dos lugares distintos para la IA" data-section="Agentes" data-budget="1:00" data-clock="14:45–15:45" style="--slide-accent:var(--warm-ink)">
   <div class="main">
     <div class="hd">
       <p class="eyebrow reveal">Dos lugares</p>
@@ -1155,7 +1213,7 @@ No muestres identificadores ni respuestas individuales. Resume sin inferir causa
 
 <!-- ===== 13-18.html ===== -->
 <!-- ============ 13 · ASK / EXECUTE / JUDGE ============ -->
-<section class="slide s13" data-title="El mismo modelo. Distintas consecuencias." data-section="Banca" data-budget="1:00" data-clock="15:00–16:00" style="--slide-accent:var(--warm-ink)">
+<section class="slide s13" data-title="El mismo modelo. Distintas consecuencias." data-section="Banca" data-budget="1:00" data-clock="15:45–16:45" style="--slide-accent:var(--warm-ink)">
   <div class="main">
     <div>
       <p class="eyebrow reveal">Ask / Execute / Judge</p>
@@ -1223,7 +1281,7 @@ No muestres identificadores ni respuestas individuales. Resume sin inferir causa
 </section>
 
 <!-- ============ 14 · ASK ============ -->
-<section class="slide s14" data-title="Ask: ¿cuántos clientes activos tenemos?" data-section="Banca · Ask" data-budget="2:30" data-clock="16:00–18:30" style="--slide-accent:var(--evidence)">
+<section class="slide s14" data-title="Ask: ¿cuántos clientes activos tenemos?" data-section="Banca · Ask" data-budget="2:30" data-clock="16:45–19:15" style="--slide-accent:var(--evidence)">
   <div class="main">
     <div class="hd">
       <div>
@@ -1294,7 +1352,7 @@ No muestres identificadores ni respuestas individuales. Resume sin inferir causa
 </section>
 
 <!-- ============ 15 · EXECUTE ============ -->
-<section class="slide s15" data-title="Execute: una petición cambia el mundo" data-section="Banca · Execute" data-budget="2:30" data-clock="18:30–21:00" style="--slide-accent:var(--action)">
+<section class="slide s15" data-title="Execute: una petición cambia el mundo" data-section="Banca · Execute" data-budget="2:30" data-clock="19:15–21:45" style="--slide-accent:var(--action)">
   <div class="main">
     <div class="hd">
       <div>
@@ -1376,7 +1434,7 @@ No muestres identificadores ni respuestas individuales. Resume sin inferir causa
 </section>
 
 <!-- ============ 16 · JUDGE ============ -->
-<section class="slide s16" data-title="Judge: agencia local, invariantes globales" data-section="Banca · Judge" data-budget="3:00" data-clock="21:00–24:00" style="--slide-accent:var(--action)">
+<section class="slide s16" data-title="Judge: agencia local, invariantes globales" data-section="Banca · Judge" data-budget="3:00" data-clock="21:45–24:45" style="--slide-accent:var(--action)">
   <div class="main">
     <div class="hd">
       <div>
@@ -1471,7 +1529,7 @@ No muestres identificadores ni respuestas individuales. Resume sin inferir causa
 </section>
 
 <!-- ============ 17 · JEV ============ -->
-<section class="slide s17" data-title="Jev: un juicio que el software puede consumir" data-section="Banca · Jev" data-budget="2:00" data-clock="24:00–26:00" style="--slide-accent:var(--warm-ink)">
+<section class="slide s17" data-title="Jev: un juicio que el software puede consumir" data-section="Banca · Jev" data-budget="2:00" data-clock="24:45–26:45" style="--slide-accent:var(--warm-ink)">
   <div class="main">
     <div class="hd">
       <div>
@@ -1556,7 +1614,7 @@ No muestres identificadores ni respuestas individuales. Resume sin inferir causa
 </section>
 
 <!-- ============ 18 · CLOSE ============ -->
-<section class="slide s18" data-title="El criterio también se construye" data-section="Cierre" data-budget="2:00" data-clock="26:00–28:00" style="--slide-accent:var(--evidence)">
+<section class="slide s18" data-title="El criterio también se construye" data-section="Cierre" data-budget="2:00" data-clock="26:45–28:45" style="--slide-accent:var(--evidence)">
   <div class="motif">
     <svg class="dg reveal d2" viewBox="0 0 1000 780" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Los mismos puntos de la portada, ahora conectados: tres caminos gobernados atraviesan la puerta de confianza hacia significado compartido, ejecución gobernada y juicio verificable; la evidencia regresa a la fuente.">
       <g>
@@ -1755,7 +1813,11 @@ No muestres identificadores ni respuestas individuales. Resume sin inferir causa
       atmo.after(top);
       const bottom = document.createElement('footer');
       bottom.className = 'bottomline';
-      bottom.innerHTML = '<span class="who">Carlos Haro · GBM AI Experience</span><a class="url" href="https://h1sort.com/gbm-ai/">h1sort.com/gbm-ai</a><span class="folio"></span>';
+      const find = '<span class="find"><a class="url" href="https://h1sort.com/gbm-ai/">h1sort.com/gbm-ai</a><span class="sep">·</span>'
+        + '<a href="https://x.com/h1sort" target="_blank" rel="noopener" aria-label="X: @h1sort"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>'
+        + '<a href="https://www.linkedin.com/in/h1sort" target="_blank" rel="noopener" aria-label="LinkedIn: h1sort"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.937 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.064 2.064 0 1 1 0-4.128 2.064 2.064 0 0 1 0 4.128zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0z"/></svg></a>'
+        + '<span class="handle">@h1sort</span></span>';
+      bottom.innerHTML = '<span class="who">Carlos Haro · GBM AI Experience</span>' + find + '<span class="folio"></span>';
       bottom.querySelector('.folio').textContent = pad(i + 1) + ' / ' + pad(total);
       const notes = s.querySelector(':scope > .notes');
       s.insertBefore(bottom, notes || null);
