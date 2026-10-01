@@ -9,7 +9,7 @@
 set -euo pipefail
 
 DECK_REPO="$(cd "$(dirname "$0")/../../.." && pwd)"
-SITE_REPO="${SITE_REPO:-$DECK_REPO/../h1sort-website}"
+SITE_REPO="$(cd "${SITE_REPO:-$DECK_REPO/../h1sort-website}" && pwd)"
 ROUTE="gbm-ai"
 DEST="$SITE_REPO/public/$ROUTE"
 
