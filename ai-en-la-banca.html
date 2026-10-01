@@ -377,6 +377,9 @@ html[data-still] .s01 .motif *{animation:none!important}
 .s03 .n0{fill:var(--paper-hi);stroke:var(--ink);stroke-width:1.6}
 .s03 .n1{fill:var(--paper-hi);stroke:var(--evidence);stroke-width:1.6}
 .s03 .lk{fill:none;stroke:var(--evidence);stroke-width:1.6;opacity:.65}
+.s03 .qm{font-family:var(--f-display);font-size:30px;font-weight:500;fill:var(--action)}
+.s03 .band{fill:var(--evidence);opacity:.08}
+.s03 .ok{fill:none;stroke:var(--evidence);stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round}
 .s03 .q{font-size:clamp(1.05rem,1.85vw,2rem);line-height:1.38;max-width:62ch;color:var(--ink);font-family:var(--f-display);font-weight:360;text-wrap:pretty;padding-left:clamp(.8rem,1.4vw,1.4rem);border-left:2px solid var(--slide-accent)}
 @media (max-width:760px){.s03 .split{grid-template-columns:1fr}.s03 .figure{max-height:24vh}}
 .s04 .motif{position:absolute;z-index:0;right:0;top:9%;bottom:9%;width:58%;display:flex;align-items:center;justify-content:center;pointer-events:none}
@@ -712,12 +715,63 @@ html[data-still] .s04b .scratch,html.no-js .s04b .scratch{clip-path:none!importa
         <span class="who">Agente</span>
         <p class="beat"><em>una pregunta de negocio</em></p>
         <div class="figure">
-          <svg class="dg" viewBox="0 0 660 262" role="img" aria-label="Por respondiente se enlazan tres observaciones: trabajo, uso reciente de IA y agente con base de datos. Un enlace falta en una fila.">
-            <text class="t-mono" x="21" y="22">Trabajo</text>
-            <text class="t-mono t-ev" x="330" y="22" text-anchor="middle">IA reciente</text>
-            <text class="t-mono t-ev" x="639" y="22" text-anchor="end">Agente con base de datos</text>
-            <path class="lk" d="M30,70 H330 H630"/><path class="lk" d="M30,115 H330 H630"/><path class="lk" d="M30,160 H330"/><path class="lk" d="M30,205 H330 H630"/><circle class="n0" cx="30" cy="70" r="9"/><circle class="n1" cx="330" cy="70" r="9"/><circle class="n1" cx="630" cy="70" r="9"/><circle class="n0" cx="30" cy="115" r="9"/><circle class="n1" cx="330" cy="115" r="9"/><circle class="n1" cx="630" cy="115" r="9"/><circle class="n0" cx="30" cy="160" r="9"/><circle class="n1" cx="330" cy="160" r="9"/><circle class="node ghost" cx="630" cy="160" r="9"/><circle class="n0" cx="30" cy="205" r="9"/><circle class="n1" cx="330" cy="205" r="9"/><circle class="n1" cx="630" cy="205" r="9"/>
-            <text class="t-mono" x="330" y="252" text-anchor="middle">Señal de escena, no un resultado.</text>
+          <svg class="dg" viewBox="0 0 660 292" role="img" aria-label="Cuatro respondentes recorren las seis preguntas del poll. La pregunta de negocio cruza la 1, la 2 y la 5. Tres respondentes contestan todo; el tercero se queda en la pregunta 3 y nunca llega a la 5.">
+            <rect class="band" x="168" y="8" width="44" height="216" rx="4"/>
+            <rect class="band" x="244" y="8" width="44" height="216" rx="4"/>
+            <rect class="band" x="472" y="8" width="44" height="216" rx="4"/>
+            <text class="t-mono" x="0" y="26">preguntas</text>
+            <text class="t-mono t-ev" x="190" y="26" text-anchor="middle">1</text>
+            <text class="t-mono t-ev" x="266" y="26" text-anchor="middle">2</text>
+            <text class="t-mono" x="342" y="26" text-anchor="middle">3</text>
+            <text class="t-mono" x="418" y="26" text-anchor="middle">4</text>
+            <text class="t-mono t-ev" x="494" y="26" text-anchor="middle">5</text>
+            <text class="t-mono" x="570" y="26" text-anchor="middle">6</text>
+            <g data-step="2">
+              <text class="t-mono" x="0" y="71">respondente 1</text>
+              <path class="lk" d="M190,66 H570"/>
+              <circle class="n1" cx="190" cy="66" r="9"/>
+              <circle class="n1" cx="266" cy="66" r="9"/>
+              <circle class="n1" cx="342" cy="66" r="9"/>
+              <circle class="n1" cx="418" cy="66" r="9"/>
+              <circle class="n1" cx="494" cy="66" r="9"/>
+              <circle class="n1" cx="570" cy="66" r="9"/>
+              <path class="ok" d="M604,66 l6,6 l12,-13"/>
+            </g>
+            <g data-step="2">
+              <text class="t-mono" x="0" y="117">respondente 2</text>
+              <path class="lk" d="M190,112 H570"/>
+              <circle class="n1" cx="190" cy="112" r="9"/>
+              <circle class="n1" cx="266" cy="112" r="9"/>
+              <circle class="n1" cx="342" cy="112" r="9"/>
+              <circle class="n1" cx="418" cy="112" r="9"/>
+              <circle class="n1" cx="494" cy="112" r="9"/>
+              <circle class="n1" cx="570" cy="112" r="9"/>
+              <path class="ok" d="M604,112 l6,6 l12,-13"/>
+            </g>
+            <g data-step="3">
+              <text class="t-mono" x="0" y="163">respondente 3</text>
+              <path class="lk" d="M190,158 H342"/>
+              <circle class="n1" cx="190" cy="158" r="9"/>
+              <circle class="n1" cx="266" cy="158" r="9"/>
+              <circle class="n1" cx="342" cy="158" r="9"/>
+              <circle class="node ghost" cx="418" cy="158" r="9"/>
+              <circle class="node ghost" cx="494" cy="158" r="9"/>
+              <circle class="node ghost" cx="570" cy="158" r="9"/>
+              <text class="t-act qm" x="604" y="167">?</text>
+            </g>
+            <g data-step="4">
+              <text class="t-mono" x="0" y="209">respondente 4</text>
+              <path class="lk" d="M190,204 H570"/>
+              <circle class="n1" cx="190" cy="204" r="9"/>
+              <circle class="n1" cx="266" cy="204" r="9"/>
+              <circle class="n1" cx="342" cy="204" r="9"/>
+              <circle class="n1" cx="418" cy="204" r="9"/>
+              <circle class="n1" cx="494" cy="204" r="9"/>
+              <circle class="n1" cx="570" cy="204" r="9"/>
+              <path class="ok" d="M604,204 l6,6 l12,-13"/>
+            </g>
+            <text class="t-sub" x="0" y="250">sombreadas: las que cruza la pregunta de negocio</text>
+            <text class="t-sub t-act" x="0" y="280" data-step="3">El 3 no llegó a la 5 (trabajo). ¿Dónde queda en la tabla?</text>
           </svg>
         </div>
       </div>
@@ -725,11 +779,13 @@ html[data-still] .s04b .scratch,html.no-js .s04b .scratch{clip-path:none!importa
     <p class="q" data-step="1">Por tipo de trabajo: ¿qué porcentaje usó IA para datos en los últimos 7 días y qué porcentaje ha usado un agente con una base de datos?</p>
   </div>
   <aside class="notes">
-    <p><strong>Propósito:</strong> mostrar que producir análisis se abarató. El conteo manual es el punto de partida tradicional; la pregunta del agente exige un SQL sustancialmente más elaborado. Paso 1 (→): aparece la pregunta de negocio tras el conteo manual. El diagrama es una señal de escena, no un resultado: sin tabla ni números.</p>
+    <p><strong>Propósito:</strong> mostrar que producir análisis se abarató. El conteo manual es el punto de partida tradicional; la pregunta del agente exige un SQL sustancialmente más elaborado. Recorrido en sentido antihorario: COUNT(*) → la pregunta de negocio (abajo) → el agente (derecha) → los respondentes. Paso 1 (→): la pregunta y la columna del agente. Pasos 2–4 (→): respondentes 1 y 2, luego el 3 (se queda en la pregunta 3), luego el 4. El diagrama es ilustrativo (cuatro respondentes tipo), no los datos de la sala.</p>
     <p><strong>Tiempo:</strong> 2:20–4:30 (2:10).</p>
     <blockquote>Primero, como siempre: un conteo. Cuántas filas de respuesta hay hasta ahora.</blockquote>
     <blockquote>Ya contamos respuestas. Pero todavía no sabemos quién está en la sala ni cómo está usando IA.</blockquote>
     <blockquote>Ahora le hago una pregunta de negocio a un agente.</blockquote>
+    <blockquote>Primero hice un COUNT(*). Me costó dar con la consulta correcta, pero se pudo. Luego hice una pregunta de negocio interesante y me apoyé en IA.</blockquote>
+    <blockquote>El problema: el primer respondente cruzó todas las preguntas. El segundo, también. El tercero se quedó a mitad del poll: nunca llegó a la 5, que es su tipo de trabajo. El cuarto, todo bien. ¿Dónde queda el tercero en la tabla?</blockquote>
     <blockquote>Yo escribí un conteo. El agente construyó y ejecutó el análisis que respondía una pregunta de negocio. Eso es lo que se abarató.</blockquote>
     <p><strong>Consulta de conteo preparada</strong> (grupo por código; el corte UTC se obtiene en la misma sesión con <code>SELECT datetime('now','-1 second');</code> y se pega el literal; no proyectar el placeholder):</p>
     <pre>SELECT COUNT(*) AS respuestas
@@ -747,7 +803,7 @@ Cruza Q5 con Q1 y Q2 usando el identificador interno de navegador.
 Usa un denominador de pares válidos para cada porcentaje; no conviertas faltantes en No.
 Muestra el corte, SQL ejecutado y una tabla compacta con numeradores y denominadores.
 No muestres identificadores ni respuestas individuales. Resume sin inferir causalidad o competencia.</pre>
-    <p class="warn">Denominadores: el % de Q1 usa pares válidos Q5+Q1; el % de Q2 usa pares válidos Q5+Q2. Los faltantes no son “No” (la fila punteada del diagrama lo sugiere). Denominador cero = indefinido, no 0 %. Marcar como “muestra insuficiente” los trabajos con muy pocos pares válidos (fijar el umbral en el ensayo). Q1 es uso reciente (7 días); Q2 es experiencia alguna vez: no son un embudo.</p>
+    <p class="warn">Denominadores: el % de Q1 usa pares válidos Q5+Q1; el % de Q2 usa pares válidos Q5+Q2. Los faltantes no son “No” (la fila punteada del diagrama). Con una consulta que parte de las respuestas de trabajo (Q5), el respondente 3 desaparece por completo de la tabla; con otra, podría contarse como “No”. Esa decisión es el puente a la siguiente diapositiva. Denominador cero = indefinido, no 0 %. Marcar como “muestra insuficiente” los trabajos con muy pocos pares válidos (fijar el umbral en el ensayo). Q1 es uso reciente (7 días); Q2 es experiencia alguna vez: no son un embudo.</p>
     <p class="warn">Secuencia: Cloudflare (conteo manual) → entorno de agente preparado (SQL generado y ejecutado en vivo). El resultado real vive en ese entorno; la diapositiva no se conecta a la base de datos. Sin dashboard, reporte ni ETL. Conexión, esquema, grupo, permisos y modelo se preparan antes; la generación y ejecución del SQL son en vivo. Conteo y agente usan el mismo grupo y el mismo corte UTC fijo. Verificar el esquema real en el ensayo.</p>
     <p class="warn">Acceso limitado a las tablas de encuestas; no inspeccionar chats, mensajes ni autenticación (“SELECT-only” en el prompt no es autorización de solo lectura). Un voter_hash es un navegador, no una persona: nunca proyectarlo ni inferir el tamaño de la audiencia. Si la muestra es pequeña o vacía, no inventar hallazgos. Si falla la red o la cuota: grabación o snapshot del ensayo rotulado como tal; nunca fabricar votos, errores ni resultados.</p>
     <p><strong>Transición:</strong> “Rápido, sí. Pero rápido no es lo mismo que correcto. Resumamos lo que acaba de pasar.”</p>
