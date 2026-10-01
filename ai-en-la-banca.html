@@ -115,6 +115,7 @@
   .folio{font-variant-numeric:tabular-nums}
   .slide.bare .topline,.slide.bare .bottomline{visibility:hidden}
   .slide.bare .bottomline .find{visibility:visible}
+  .slide.nofoot .bottomline{visibility:hidden}
 
   /* ---------- layout primitives ---------- */
   .main{min-height:0;display:flex;flex-direction:column;justify-content:center;gap:var(--gap);padding:clamp(.5rem,2vh,1.6rem) 0}
@@ -577,8 +578,14 @@ html[data-still] .s04b .scratch,html.no-js .s04b .scratch{clip-path:none!importa
 .s18 .main{justify-content:center}
 .s18 .col{max-width:min(36%,34rem);display:flex;flex-direction:column;gap:clamp(.8rem,2.6vh,2rem)}
 .s18 h2{font-size:clamp(1.9rem,3.7vw,4rem);max-width:12ch}
-.s18 .url{font-family:var(--f-mono);font-size:clamp(1rem,1.5vw,1.45rem);letter-spacing:.06em;color:var(--ink);display:flex;align-items:center;gap:.8em}
-.s18 .url::before{content:'';width:2.2em;height:1px;background:var(--action)}
+.s18 .sign{font-family:var(--f-mono);font-size:clamp(.9rem,1.3vw,1.3rem);letter-spacing:.06em;color:var(--ink-2);display:flex;align-items:center;flex-wrap:wrap;gap:.7em;margin:0}
+.s18 .sign::before{content:'';width:2.2em;height:1px;background:var(--action)}
+.s18 .sign a{color:inherit;display:inline-flex}.s18 .sign a:hover{color:var(--evidence)}
+.s18 .sign svg{width:1.05em;height:1.05em;fill:currentColor}
+.s18 .deckurl{display:flex;flex-direction:column;gap:.45rem;width:fit-content;max-width:100%;text-decoration:none;color:var(--ink);background:var(--paper-hi);border:1px solid var(--ink-faint);border-left:4px solid var(--action);padding:clamp(.7rem,1.8vh,1.2rem) clamp(.9rem,1.6vw,1.6rem);box-shadow:0 18px 40px -28px rgba(23,56,47,.45)}
+.s18 .deckurl .label{color:var(--action)}
+.s18 .deckurl .u{font-family:var(--f-mono);font-weight:500;font-size:clamp(1.35rem,2.7vw,3rem);letter-spacing:-.01em;line-height:1.05;white-space:nowrap}
+.s18 .deckurl em{font-style:normal;color:var(--action)}
 @media (max-width:760px){
   .s18 .motif{inset:auto 0 0 0;height:48%;width:100%;opacity:.9}
   .s18 .main{justify-content:flex-start}
@@ -1614,7 +1621,7 @@ No muestres identificadores ni respuestas individuales. Resume sin inferir causa
 </section>
 
 <!-- ============ 18 · CLOSE ============ -->
-<section class="slide s18" data-title="El criterio también se construye" data-section="Cierre" data-budget="2:00" data-clock="26:45–28:45" style="--slide-accent:var(--evidence)">
+<section class="slide s18 nofoot" data-title="El criterio también se construye" data-section="Cierre" data-budget="2:00" data-clock="26:45–28:45" style="--slide-accent:var(--evidence)">
   <div class="motif">
     <svg class="dg reveal d2" viewBox="0 0 1000 780" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Los mismos puntos de la portada, ahora conectados: tres caminos gobernados atraviesan la puerta de confianza hacia significado compartido, ejecución gobernada y juicio verificable; la evidencia regresa a la fuente.">
       <g>
@@ -1642,7 +1649,8 @@ No muestres identificadores ni respuestas individuales. Resume sin inferir causa
       <p class="eyebrow reveal">Hoy y mañana</p>
       <p class="lede reveal d1">El análisis se abarató. Nuestro trabajo:</p>
       <h2 class="reveal d2">Que el significado y las consecuencias <em>no se pierdan.</em></h2>
-      <p class="url reveal d3">h1sort.com</p>
+      <p class="sign reveal d3"><span>Carlos Haro</span><span class="sep">·</span><a href="https://x.com/h1sort" target="_blank" rel="noopener" aria-label="X: @h1sort"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a><a href="https://www.linkedin.com/in/h1sort" target="_blank" rel="noopener" aria-label="LinkedIn: h1sort"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.937 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.064 2.064 0 1 1 0-4.128 2.064 2.064 0 0 1 0 4.128zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0z"/></svg></a><span>@h1sort</span></p>
+      <a class="deckurl reveal d4" href="https://h1sort.com/gbm-ai/"><span class="label">Las diapositivas</span><span class="u">h1sort.com/<em>gbm-ai</em></span></a>
     </div>
   </div>
   <aside class="notes">
@@ -1651,6 +1659,7 @@ No muestres identificadores ni respuestas individuales. Resume sin inferir causa
     <blockquote>El futuro de la IA en la banca no es solamente un modelo más inteligente. Es una institución capaz de convertir su criterio en sistemas: qué significa una métrica, qué evidencia exige un juicio y quién puede autorizar una acción.</blockquote>
     <blockquote>El análisis se abarató. Nuestro trabajo es que su significado y sus consecuencias no se pierdan.</blockquote>
     <p class="warn">Nada después de esta línea; no abrir un tema nuevo. Hasta 2:00 de buffer para preguntas. Tono optimista: los controles habilitan una delegación útil. Puente opcional para el panel (no proyectar): «¿Qué debe construir una institución alrededor de un modelo para que sus capacidades se conviertan en un producto financiero confiable?»</p>
+    <p>Señalar la URL grande: las diapositivas quedan en h1sort.com/gbm-ai; @h1sort en X y LinkedIn. Esta diapositiva no lleva pie para no duplicar los datos.</p>
     <p><strong>Transición:</strong> ninguna. Fin. Pasar a preguntas.</p>
   </aside>
 </section>
@@ -1813,11 +1822,11 @@ No muestres identificadores ni respuestas individuales. Resume sin inferir causa
       atmo.after(top);
       const bottom = document.createElement('footer');
       bottom.className = 'bottomline';
-      const find = '<span class="find"><a class="url" href="https://h1sort.com/gbm-ai/">h1sort.com/gbm-ai</a><span class="sep">·</span>'
+      const find = '<span class="find"><a class="deck-link" href="https://h1sort.com/gbm-ai/">h1sort.com/gbm-ai</a><span class="sep">·</span>'
         + '<a href="https://x.com/h1sort" target="_blank" rel="noopener" aria-label="X: @h1sort"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>'
         + '<a href="https://www.linkedin.com/in/h1sort" target="_blank" rel="noopener" aria-label="LinkedIn: h1sort"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.937 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.064 2.064 0 1 1 0-4.128 2.064 2.064 0 0 1 0 4.128zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0z"/></svg></a>'
         + '<span class="handle">@h1sort</span></span>';
-      bottom.innerHTML = '<span class="who">Carlos Haro · GBM AI Experience</span>' + find + '<span class="folio"></span>';
+      bottom.innerHTML = '<span class="who">GBM AI Experience</span>' + find + '<span class="folio"></span>';
       bottom.querySelector('.folio').textContent = pad(i + 1) + ' / ' + pad(total);
       const notes = s.querySelector(':scope > .notes');
       s.insertBefore(bottom, notes || null);
