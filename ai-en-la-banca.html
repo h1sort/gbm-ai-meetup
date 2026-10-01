@@ -266,6 +266,7 @@
   html.no-js .dg .exec.draw,html.no-js .dg .refuse.draw,html.no-js .dg .wire.draw{stroke-dasharray:none!important}
   html.no-js .dg .propose.draw,html.no-js .dg .return.draw,html.no-js .dg .rail.draw{opacity:1!important}
   html.no-js .hud{display:none}
+  html[data-public] .hud{display:none}   /* live site copy: no controls, notes stripped at publish */
 
 
 /* --- 01-04.html --- */
@@ -1729,7 +1730,8 @@ No muestres identificadores ni respuestas individuales. Resume sin inferir causa
     const root = document.documentElement;
     root.classList.remove('no-js');
     const still = params.get('still') === '1';
-    const presenter = params.get('presenter') === '1';
+    const pub = 'public' in root.dataset;
+    const presenter = !pub && params.get('presenter') === '1';
     if (still) root.dataset.still = '1';
     if (presenter) root.dataset.presenter = '1';
     const reduced = still || matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -1867,6 +1869,7 @@ No muestres identificadores ni respuestas individuales. Resume sin inferir causa
       if (e.metaKey || e.ctrlKey || e.altKey) return;
       if (e.key === 'Escape') { document.querySelectorAll('.overlay.open').forEach(o => o.classList.remove('open')); return; }
       const k = e.key.toLowerCase();
+      if (pub && (k === 'n' || k === 'p' || k === '?' || k === 'h')) return;
       if (k === 'n') return act('notes');
       if (k === 's') return act('sources');
       if (k === '?' || k === 'h') return act('help');
