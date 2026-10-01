@@ -67,3 +67,6 @@ dmypy.json
 *.swo
 *~
 PRESENTER_NOTES.md
+# Taxi data for the slide-12 demo (~181 MB; fetch with demo/download_data.py)
+demo/data/*.parquet
+demo/data/*.part
