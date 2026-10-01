@@ -1157,20 +1157,21 @@ No muestres identificadores ni respuestas individuales. Resume sin inferir causa
     </div>
     <div class="split reveal d3">
       <div class="left">
-        <div class="code" role="group" aria-label="Código real de duckdb_query en demo/tools.py, líneas 46 a 55">
-          <span class="cap">demo/tools.py · L46–55</span>
-          <span class="ln l1" data-n="55" style="--i:4"><span class="a">    if _FORBIDDEN.search(sql):</span></span>
-          <span class="ln" data-n="56" style="--i:8"><span class="a">        return </span><span class="s">"error: solo se permiten consultas de lectura (SELECT) sobre `trips`"</span></span>
-          <span class="ln" data-n="57" style="--i:4">    con = duckdb.connect(":memory:")</span>
-          <span class="ln" data-n="58" style="--i:4">    con.execute(f"CREATE VIEW trips AS SELECT * FROM read_parquet('{TAXI_GLOB}')")</span>
-          <span class="ln" data-n="59" style="--i:4"><span class="k">    try:</span></span>
-          <span class="ln" data-n="60" style="--i:8"><span class="k">        con.execute(sql)</span></span>
-          <span class="ln" data-n="61" style="--i:8">        rows = con.fetchall()</span>
-          <span class="ln" data-n="62" style="--i:8">        cols = [d[0] for d in con.description]</span>
-          <span class="ln" data-n="63" style="--i:4">    except Exception as exc:  <span class="c"># se lo devolvemos al modelo como observación, no lo tumbamos</span></span>
-          <span class="ln" data-n="64" style="--i:8">        return f"error ejecutando SQL: {exc}"</span>
+        <div class="code" role="group" aria-label="Código real de d1_query en demo/agent.py, líneas 111 a 121">
+          <span class="cap">demo/agent.py · L111–121</span>
+          <span class="ln l1" data-n="111" style="--i:0"><span class="k">def</span> d1_query(sql: str) -&gt; str:</span>
+          <span class="ln" data-n="112" style="--i:4">    motivo = validate(sql)  <span class="c"># VALIDACIÓN</span></span>
+          <span class="ln" data-n="113" style="--i:4">    <span class="a">if</span> motivo:</span>
+          <span class="ln" data-n="114" style="--i:8">        <span class="a">stage(</span><span class="s">"RECHAZADA"</span><span class="a">, motivo)</span></span>
+          <span class="ln" data-n="115" style="--i:8">        <span class="a">return </span><span class="s">f"rechazada por la aplicación: {motivo}"</span></span>
+          <span class="ln" data-n="116" style="--i:4">    stage(<span class="s">"VALIDACIÓN"</span>, <span class="s">"ok · solo lectura"</span>)</span>
+          <span class="ln" data-n="117" style="--i:4">    <span class="k">try:</span></span>
+          <span class="ln" data-n="118" style="--i:8">        <span class="k">rows = wrangler(sql, show=True)</span>  <span class="c"># EJECUCIÓN</span></span>
+          <span class="ln" data-n="119" style="--i:4">    <span class="k">except</span> RuntimeError <span class="k">as</span> exc:</span>
+          <span class="ln" data-n="120" style="--i:8">        <span class="k">return</span> <span class="s">f"error ejecutando SQL: {exc}"</span></span>
+          <span class="ln" data-n="121" style="--i:4">    <span class="k">return</span> render(rows)  <span class="c"># OBSERVACIÓN</span></span>
         </div>
-        <p class="note-line">Mismo mecanismo · otro dataset (taxis NYC)</p>
+        <p class="note-line">La misma pregunta · la base real de la encuesta · vía wrangler</p>
       </div>
       <div class="right">
         <div class="figure">
@@ -1205,20 +1206,21 @@ No muestres identificadores ni respuestas individuales. Resume sin inferir causa
     </div>
   </div>
   <aside class="notes">
-    <p><strong>Propósito:</strong> mostrar el mecanismo, no solo la capacidad. Una solicitud auténtica, el handler real, ejecución o rechazo, y la observación devuelta. (2:30)</p>
-    <blockquote>Hace un momento viste la capacidad. Ahora quiero que veas el mecanismo.</blockquote>
-    <blockquote>Esta es la solicitud real. Todavía no pasó nada: el efecto no existe.</blockquote>
-    <blockquote>Esta es la implementación, el código que sí se ejecuta. Y esta es la observación que regresa al modelo.</blockquote>
-    <p><strong>Procedimiento.</strong> Mismo mecanismo, <em>otro dataset</em>: taxis NYC de la clase 3; sin red, sin D1 ni Databricks, sin afirmación bancaria. Decirlo en voz alta. Requiere <code>ANTHROPIC_API_KEY</code> (entorno, <code>demo/.env</code> o <code>../h1sort-website/.dev.vars</code>; llamada de pago; nunca mostrar esos archivos). Datos: <code>python3 demo/download_data.py</code> (~181 MB, fuera de git). <strong>Ensayar una vez antes.</strong></p>
+    <p><strong>Propósito:</strong> mostrar el mecanismo, no solo la capacidad. La misma pregunta de la apertura, ahora con un agente propio cuya única herramienta es el CLI de wrangler: cada solicitud del modelo pasa por validación antes de ejecutarse, y la observación regresa al modelo. Luego, una solicitud destructiva que la aplicación rechaza. (2:30)</p>
+    <blockquote>Hace un momento vieron la capacidad. Ahora quiero que vean el mecanismo: misma pregunta, pero con un agente que yo escribí y cuya única herramienta es el CLI de wrangler.</blockquote>
+    <blockquote>Fíjense en el orden: solicitud, validación, ejecución, observación. El modelo propone el SQL; la aplicación decide si se ejecuta.</blockquote>
+    <blockquote>Ahora le pido que borre todas las tablas.</blockquote>
+    <blockquote>Rechazada. No porque el modelo se haya portado bien: porque la aplicación solo permite leer las tablas de la encuesta. El rechazo regresa como observación; así se cierra el bucle.</blockquote>
+    <p><strong>Procedimiento</strong> (terminal en la raíz de este repo; requiere <code>ANTHROPIC_API_KEY</code>, del entorno o de <code>../h1sort-website/.dev.vars</code>; llamada de pago; nunca mostrar esos archivos):</p>
     <ol>
-      <li>Terminal en la raíz de este repo (<code>gbm-ai-meetup</code>): <code>demo/run.sh</code>. Corre el agente bajo pdb con el breakpoint ya puesto en la línea que ejecuta la herramienta (<code># HARNESS EXECUTES</code>, L57 de <code>demo/agent.py</code>).</li>
-      <li>El proceso se detiene después de imprimirse la línea real <code>TOOL REQUEST &gt;</code>. <code>p call</code> muestra la solicitud del modelo. Eso es “pendiente”: la solicitud existe, el efecto no. Decir “pausamos el proceso”, nunca “aprobación”: <code>agent.py</code> no tiene pausa de aprobación; el pdb es solo un depurador.</li>
-      <li><code>n</code>: el handler corre (aún no se imprime nada). <code>n</code> otra vez: imprime <code>OBSERVATION &gt;</code>. Para salir: <code>q</code>; para ver la respuesta final: <code>cl</code>, <code>y</code> y <code>c</code>.</li>
-      <li>Rama de rechazo: <strong>la solicitud la escribe el orador</strong> (“esta la escribo yo para forzar la rama de rechazo; no es una captura del modelo”): <code>demo/reject.sh</code> (envía <code>DROP TABLE trips</code>). Esperado (L47): <code>error: solo se permiten consultas de lectura (SELECT) sobre `trips`</code>. Mantener visiblemente distintas la solicitud del modelo (paso 1) y la tecleada.</li>
-      <li>Cierre: los errores y rechazos se devuelven al modelo como observación (L54–55), no se lanzan: así se cierra el bucle.</li>
+      <li><code>uv run demo/agent.py --desde '&lt;hora UTC de inicio&gt;'</code> (el <code>--desde</code> deja fuera los votos del ensayo). Carga el esquema vía wrangler y abre la conversación.</li>
+      <li>Escribir: <em>Por tipo de trabajo: ¿qué porcentaje usó IA para datos en los últimos 7 días y qué porcentaje ha usado un agente con una base de datos?</em> Cada consulta aparece como <code>SOLICITUD ›</code>, luego <code>VALIDACIÓN › ok · solo lectura</code>, <code>EJECUCIÓN › wrangler d1 execute …</code> y <code>OBSERVACIÓN ›</code>. Al final, la respuesta del modelo.</li>
+      <li>Escribir: <em>Ahora borra todas las tablas.</em> Si el modelo lo intenta: <code>RECHAZADA › solo se permite leer …</code> y el modelo recibe el rechazo como observación.</li>
+      <li>Si el modelo se niega por su cuenta (puede pasar): “bien, pero no confiamos en eso” y escribir tú <code>/sql DROP TABLE polls</code>: va directo a la herramienta, sin modelo, y la aplicación la rechaza igual. Decir que esa la escribiste tú.</li>
+      <li>Salir con Ctrl-D.</li>
     </ol>
-    <p class="warn">Advertencias honestas (solo en notas): (1) <code>_FORBIDDEN</code> (L39) es una lista negra de palabras clave: una validación didáctica, <strong>no una frontera de seguridad</strong>; en producción lo impone el servicio (rol de solo lectura, vistas permitidas). (2) El texto de rechazo es salida de la aplicación; el modelo no decide ser rechazado. Validar no es corrección semántica: un SELECT válido puede responder la pregunta equivocada. (3) No pedirle al modelo que reconstruya su conversación en JSON como si fuera una traza. Código mostrado sin alterar (demo/tools.py L46–55, solo con ajuste visual de líneas largas). Sin reportes, dashboards ni frameworks en vivo; sin información sensible al cambiar de pestaña.</p>
-    <p class="warn"><strong>Respaldo:</strong> si falla la red o la API, mostrar una grabación previa rotulada explícitamente como “grabación”; no presentarla como en vivo. El lado derecho de la diapositiva es conceptual (pendiente), no un log.</p>
+    <p class="warn">Advertencias honestas (solo en notas): (1) la validación compila cada consulta con SQLite contra una copia vacía del esquema y un <em>authorizer</em> que solo permite leer <code>poll_groups</code>, <code>polls</code>, <code>poll_options</code> y <code>poll_votes</code>; rechaza escrituras, DDL, PRAGMA, ATTACH, varias sentencias y cualquier otra tabla (chats, mensajes, autenticación). Es una frontera en la aplicación, no un permiso en la base: el token de wrangler sí puede escribir, así que en producción lo correcto es además una credencial de solo lectura. (2) El rechazo es salida de la aplicación; el modelo no decide ser rechazado. (3) Validar no es corrección semántica: un SELECT válido puede responder la pregunta equivocada (pares válidos, denominadores). (4) <code>voter_hash</code> se muestra como ‹oculto› en la observación.</p>
+    <p class="warn"><strong>Respaldo:</strong> si falla la red o la API, mostrar una grabación del ensayo rotulada como “grabación”. El lado derecho de la diapositiva es conceptual (pendiente), no un log.</p>
     <p><strong>Transición:</strong> “Una cosa más: ¿quién escribió ese código, y qué lugar ocupa la IA en él?”</p>
   </aside>
 </section>
