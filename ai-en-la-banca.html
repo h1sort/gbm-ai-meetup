@@ -426,29 +426,38 @@ html[data-still] .s04 .row{animation:none!important}
 @media (max-width:760px){.s04 .motif{inset:auto 0 0 0;height:40%;width:100%;opacity:.7}.s04 .col{max-width:none}.s04 .main{justify-content:flex-start}}
 
 /* --- 01-04.html --- */
-.s04b .main{justify-content:center;gap:clamp(.8rem,2.6vh,2rem)}
-.s04b .eyebrow{font-weight:600;letter-spacing:.14em;text-transform:none}
-.s04b .eyebrow::before{display:none}
-.s04b .eyebrow span{border-bottom:2px solid currentColor;padding-bottom:.35em}
-.s04b h2{font-size:clamp(2.6rem,7vw,7.4rem);max-width:none;line-height:.95}
-.s04b dl{display:grid;grid-template-columns:minmax(7rem,14rem) minmax(0,1fr);gap:clamp(.55rem,2.1vh,1.5rem) clamp(1rem,3vw,3rem);margin:0;align-items:baseline}
-.s04b dt{font-family:var(--f-mono);font-size:var(--t-label);letter-spacing:.16em;text-transform:uppercase;color:var(--ink-dim)}
-.s04b dd{margin:0;font-size:clamp(1.05rem,2vw,2.1rem);line-height:1.2;color:var(--ink)}
-.s04b dd a{color:inherit;text-decoration:none;border-bottom:2px solid var(--action);padding-bottom:.05em}
-.s04b .takes{border-left:3px solid var(--action);padding-left:clamp(.8rem,1.6vw,1.6rem);display:flex;flex-direction:column;gap:clamp(.3rem,1vh,.7rem)}
+.s04b .main{justify-content:center}
+.s04b .split{grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:clamp(1.5rem,5vw,6rem);align-items:center}
+.s04b .txt{display:flex;flex-direction:column;gap:clamp(.7rem,2.4vh,1.8rem)}
+.s04b h2{font-size:clamp(2.4rem,5.6vw,6rem);max-width:none}
+.s04b .lede{max-width:30ch}
+.s04b .sign{font-family:var(--f-mono);font-size:clamp(1rem,1.7vw,1.7rem);letter-spacing:.04em;color:var(--ink);display:flex;align-items:center;flex-wrap:wrap;gap:.6em;margin-top:clamp(.2rem,1.4vh,1rem)}
+.s04b .sign::before{content:'';width:2.2em;height:1px;background:var(--action);flex:none;margin-right:.2em}
+.s04b .sign a{color:inherit;text-decoration:none;display:inline-flex;align-items:center}
+.s04b .sign a:hover{color:var(--evidence)}
+.s04b .sign svg{width:.95em;height:.95em;fill:currentColor}
+.s04b .sign .sep{color:var(--ink-dim)}
+.s04b .takeswrap{position:relative;padding:clamp(.6rem,1.6vh,1.2rem)}
+.s04b .mk{position:absolute;width:clamp(.9rem,2vh,1.6rem);height:clamp(.9rem,2vh,1.6rem);border:0 solid var(--action);opacity:.8;pointer-events:none}
+.s04b .mk.tl{left:0;top:0;border-width:1.5px 0 0 1.5px}.s04b .mk.tr{right:0;top:0;border-width:1.5px 1.5px 0 0}
+.s04b .mk.bl{left:0;bottom:0;border-width:0 0 1.5px 1.5px}.s04b .mk.br{right:0;bottom:0;border-width:0 1.5px 1.5px 0}
+.s04b .takes{background:var(--paper-hi);border:1px solid var(--ink-faint);box-shadow:0 30px 60px -36px rgba(23,56,47,.45);padding:clamp(1rem,3vh,2.4rem) clamp(1.1rem,2.4vw,2.6rem);display:flex;flex-direction:column;gap:clamp(.7rem,2.2vh,1.6rem)}
+.s04b .takes .label{font-family:var(--f-mono);font-size:var(--t-label);letter-spacing:.16em;color:var(--action)}
 .s04b .takes p{margin:0}
-.s04b .old{position:relative;width:fit-content;transition:color .5s var(--ease) .4s}
-.s04b .old:has(.scratch.shown){color:var(--ink-dim)}
-.s04b .scratch{position:absolute;left:-2%;top:0;width:104%;height:100%;overflow:visible;pointer-events:none;clip-path:inset(-50% 100% -50% 0)}
-.s04b .scratch path{fill:none;stroke:var(--action);stroke-width:3;stroke-linecap:round;stroke-linejoin:round;vector-effect:non-scaling-stroke}
-.s04b .scratch.shown{clip-path:inset(-50% 0 -50% 0);transition:opacity .2s linear,clip-path .7s cubic-bezier(.5,0,.3,1)}
-.s04b .old + .old .scratch.shown{transition-delay:.45s}
-.s04b .new{font-weight:600}
-.s04b .new em{font-style:normal;color:var(--action)}
-@media (prefers-reduced-motion:reduce){.s04b .scratch{clip-path:none!important}}
-html[data-still] .s04b .scratch,html.no-js .s04b .scratch{clip-path:none!important}
-@media (max-width:760px){.s04b dl{grid-template-columns:1fr;gap:.2rem}.s04b dd{margin-bottom:.6rem}
-  .s04b .scratch{display:none}.s04b .old:has(.scratch.shown){text-decoration:line-through 2px var(--action)}}
+.s04b .takes p:not(.label){font-family:var(--f-display);font-weight:340;font-size:clamp(1.15rem,2.1vw,2.3rem);line-height:1.18;letter-spacing:-.01em;font-variation-settings:'opsz' 144;text-wrap:balance}
+.s04b .old{position:relative;color:var(--ink-2);transition:color .5s var(--ease) .4s}
+.s04b .old:has(.strike-at.shown){color:var(--ink-dim)}
+.s04b .old .t{background-image:url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 10' preserveAspectRatio='none'><g fill='none' stroke='%23b75437' stroke-width='3' stroke-linecap='round' vector-effect='non-scaling-stroke'><path vector-effect='non-scaling-stroke' d='M0,6.2 C18,4.6 33,6.8 51,5.2 S82,4.4 100,5.6'/><path vector-effect='non-scaling-stroke' d='M99,3.8 C80,6.4 62,3.6 44,6.4 S14,4.4 1,7'/></g></svg>");background-repeat:no-repeat;background-position:left 55%;background-size:0% 100%;-webkit-box-decoration-break:clone;box-decoration-break:clone;transition:background-size .7s cubic-bezier(.5,0,.3,1)}
+.s04b .old:has(.strike-at.shown) .t{background-size:100% 100%}
+.s04b .old + .old:has(.strike-at.shown) .t{transition-delay:.45s}
+.s04b .strike-at{position:absolute;width:0;height:0}
+.s04b .new{color:var(--ink);padding-top:clamp(.6rem,1.8vh,1.3rem);border-top:1px solid var(--ink-faint)}
+.s04b .new em{font-style:italic;font-weight:320;color:var(--evidence)}
+@media (prefers-reduced-motion:reduce){.s04b .old .t{transition:none}}
+html.no-js .s04b .old .t{background-size:100% 100%}
+@media (max-width:760px){
+  .s04b .split{grid-template-columns:1fr;gap:1.4rem}
+}
 
 /* --- 05-08.html --- */
 /* ===== shared by the four history slides (s05–s08): one map, viewBox 0 -10 1100 460 ===== */
@@ -834,23 +843,25 @@ No muestres identificadores ni respuestas individuales. Resume sin inferir causa
 </section>
 <!-- ============ 04b · ¿QUIÉN ES ESTE TIPO? ============ -->
 
-<section class="slide s04b" data-title="¿Quién es este tipo?" data-section="Apertura" data-budget="0:45" data-clock="5:00–5:45" style="--slide-accent:var(--action)">
+<section class="slide s04b" data-title="¿Quién es este tipo?" data-section="Apertura" data-budget="0:45" data-clock="5:00–5:45" style="--slide-accent:var(--evidence)">
   <div class="main">
-    <p class="eyebrow reveal d1"><span>¿quién_es_este_tipo?</span></p>
-    <h2 class="reveal d1">Carlos <em>Haro</em></h2>
-    <dl class="reveal d2">
-      <dt>Actualmente</dt><dd>Sr. AI Engineer en Banco Santander</dd>
-      <dt>Antes</dt><dd>casi 10 años lidiando con datos</dd>
-      <dt>LinkedIn</dt><dd><a href="https://www.linkedin.com/in/h1sort" target="_blank" rel="noopener">h1sort</a></dd>
-      <dt>Amo_X</dt><dd><a href="https://x.com/h1sort" target="_blank" rel="noopener">h1sort</a></dd>
-      <dt>Sitio web</dt><dd><a href="https://h1sort.com" target="_blank" rel="noopener">h1sort.com</a></dd>
-      <dt>Hot takes</dt>
-      <dd class="takes">
-        <p class="old">pandas es una pésima librería para el análisis de datos<svg class="scratch" data-step="1" viewBox="0 0 100 10" preserveAspectRatio="none" aria-hidden="true"><path d="M0,6.2 C18,4.6 33,6.8 51,5.2 S82,4.4 100,5.6"/><path d="M99,3.6 C80,6.4 62,3.4 44,6.6 S14,4.2 1,7.4"/></svg></p>
-        <p class="old">los perros son mejores que los gatos<svg class="scratch" data-step="1" viewBox="0 0 100 10" preserveAspectRatio="none" aria-hidden="true"><path d="M0,5.8 C20,4.4 38,6.9 57,5 S86,4.6 100,6"/><path d="M100,3.8 C78,6.6 55,3.6 36,6.4 S12,4.4 0,7"/></svg></p>
-        <p class="new" data-step="2"><em>Santos Laguna</em> es el mejor equipo de futbol de la historia</p>
-      </dd>
-    </dl>
+    <div class="split">
+      <div class="txt">
+        <p class="eyebrow reveal">¿Quién es este tipo?</p>
+        <h2 class="reveal d1">Carlos <em>Haro</em></h2>
+        <p class="lede reveal d2">Sr. AI Engineer en Banco Santander. Casi 10 años lidiando con datos.</p>
+        <p class="sign reveal d3"><a href="https://x.com/h1sort" target="_blank" rel="noopener" aria-label="X: @h1sort"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a><a href="https://www.linkedin.com/in/h1sort" target="_blank" rel="noopener" aria-label="LinkedIn: h1sort"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.937 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.064 2.064 0 1 1 0-4.128 2.064 2.064 0 0 1 0 4.128zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0z"/></svg></a><span>@h1sort</span><span class="sep">·</span><a href="https://h1sort.com" target="_blank" rel="noopener">h1sort.com</a></p>
+      </div>
+      <div class="takeswrap reveal d2">
+        <i class="mk tl"></i><i class="mk tr"></i><i class="mk bl"></i><i class="mk br"></i>
+        <div class="takes">
+          <p class="label">Hot takes</p>
+          <p class="old"><span class="t">pandas es una pésima librería para el análisis de datos</span><i class="strike-at" data-step="1" aria-hidden="true"></i></p>
+          <p class="old"><span class="t">los perros son mejores que los gatos</span><i class="strike-at" data-step="1" aria-hidden="true"></i></p>
+          <p class="new" data-step="2"><em>Santos Laguna</em> es el mejor equipo de futbol de la historia.</p>
+        </div>
+      </div>
+    </div>
   </div>
   <aside class="notes">
     <p><strong>Propósito:</strong> presentarse con humor después de la demo, cuando la sala ya vio qué hace uno. Romper el hielo antes de la historia. No vender currículum.</p>
