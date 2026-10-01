@@ -715,7 +715,7 @@ html[data-still] .s04b .scratch,html.no-js .s04b .scratch{clip-path:none!importa
         <span class="who">Agente</span>
         <p class="beat"><em>una pregunta de negocio</em></p>
         <div class="figure">
-          <svg class="dg" viewBox="0 0 660 292" role="img" aria-label="Cuatro respondentes recorren las seis preguntas del poll. La pregunta de negocio cruza la 1, la 2 y la 5. Tres respondentes contestan todo; el tercero se queda en la pregunta 3 y nunca llega a la 5.">
+          <svg class="dg" viewBox="0 0 660 292" role="img" aria-label="Cuatro respondentes recorren las seis preguntas del poll. La pregunta de negocio cruza la 1, la 2 y la 5. Dos respondentes contestan todo; el tercero se queda en la pregunta 3 y nunca llega a la 5; el cuarto se queda en la 5, que sí cuenta.">
             <rect class="band" x="168" y="8" width="44" height="216" rx="4"/>
             <rect class="band" x="244" y="8" width="44" height="216" rx="4"/>
             <rect class="band" x="472" y="8" width="44" height="216" rx="4"/>
@@ -761,13 +761,13 @@ html[data-still] .s04b .scratch,html.no-js .s04b .scratch{clip-path:none!importa
             </g>
             <g data-step="4">
               <text class="t-mono" x="0" y="209">respondente 4</text>
-              <path class="lk" d="M190,204 H570"/>
+              <path class="lk" d="M190,204 H494"/>
               <circle class="n1" cx="190" cy="204" r="9"/>
               <circle class="n1" cx="266" cy="204" r="9"/>
               <circle class="n1" cx="342" cy="204" r="9"/>
               <circle class="n1" cx="418" cy="204" r="9"/>
               <circle class="n1" cx="494" cy="204" r="9"/>
-              <circle class="n1" cx="570" cy="204" r="9"/>
+              <circle class="node ghost" cx="570" cy="204" r="9"/>
               <path class="ok" d="M604,204 l6,6 l12,-13"/>
             </g>
             <text class="t-sub" x="0" y="250">sombreadas: las que cruza la pregunta de negocio</text>
@@ -779,13 +779,13 @@ html[data-still] .s04b .scratch,html.no-js .s04b .scratch{clip-path:none!importa
     <p class="q" data-step="1">Por tipo de trabajo: ¿qué porcentaje usó IA para datos en los últimos 7 días y qué porcentaje ha usado un agente con una base de datos?</p>
   </div>
   <aside class="notes">
-    <p><strong>Propósito:</strong> mostrar que producir análisis se abarató. El conteo manual es el punto de partida tradicional; la pregunta del agente exige un SQL sustancialmente más elaborado. Recorrido en sentido antihorario: COUNT(*) → la pregunta de negocio (abajo) → el agente (derecha) → los respondentes. Paso 1 (→): la pregunta y la columna del agente. Pasos 2–4 (→): respondentes 1 y 2, luego el 3 (se queda en la pregunta 3), luego el 4. El diagrama es ilustrativo (cuatro respondentes tipo), no los datos de la sala.</p>
+    <p><strong>Propósito:</strong> mostrar que producir análisis se abarató. El conteo manual es el punto de partida tradicional; la pregunta del agente exige un SQL sustancialmente más elaborado. Recorrido en sentido antihorario: COUNT(*) → la pregunta de negocio (abajo) → el agente (derecha) → los respondentes. Paso 1 (→): la pregunta y la columna del agente. Pasos 2–4 (→): respondentes 1 y 2, luego el 3 (se queda en la pregunta 3), luego el 4 (se queda en la 5: no contestó la 6, pero sí todas las que cruza la pregunta, así que cuenta). El diagrama es ilustrativo (cuatro respondentes tipo), no los datos de la sala.</p>
     <p><strong>Tiempo:</strong> 2:20–4:30 (2:10).</p>
     <blockquote>Primero, como siempre: un conteo. Cuántas filas de respuesta hay hasta ahora.</blockquote>
     <blockquote>Ya contamos respuestas. Pero todavía no sabemos quién está en la sala ni cómo está usando IA.</blockquote>
     <blockquote>Ahora le hago una pregunta de negocio a un agente.</blockquote>
     <blockquote>Primero hice un COUNT(*). Me costó dar con la consulta correcta, pero se pudo. Luego hice una pregunta de negocio interesante y me apoyé en IA.</blockquote>
-    <blockquote>El problema: el primer respondente cruzó todas las preguntas. El segundo, también. El tercero se quedó a mitad del poll: nunca llegó a la 5, que es su tipo de trabajo. El cuarto, todo bien. ¿Dónde queda el tercero en la tabla?</blockquote>
+    <blockquote>El problema: el primer respondente cruzó todas las preguntas. El segundo, también. El tercero se quedó a mitad del poll: nunca llegó a la 5, que es su tipo de trabajo. El cuarto se quedó en la 5, pero contestó todo lo que la pregunta necesita: todo bien. ¿Dónde queda el tercero en la tabla?</blockquote>
     <blockquote>Yo escribí un conteo. El agente construyó y ejecutó el análisis que respondía una pregunta de negocio. Eso es lo que se abarató.</blockquote>
     <p><strong>Consulta de conteo preparada</strong> (grupo por código; el corte UTC se obtiene en la misma sesión con <code>SELECT datetime('now','-1 second');</code> y se pega el literal; no proyectar el placeholder):</p>
     <pre>SELECT COUNT(*) AS respuestas
