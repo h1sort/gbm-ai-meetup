@@ -5,8 +5,7 @@
 # ///
 """Agente de la diapositiva 12: Solicitud -> Validación -> Ejecución -> Observación.
 
-    uv run demo/agent.py                                  # conversación en vivo
-    uv run demo/agent.py --desde "2026-10-02 18:00:00"    # solo votos desde esa hora UTC
+    uv run demo/agent.py
 
 Una sola herramienta, d1_query, que corre `wrangler d1 execute` contra la base de
 encuestas de h1sort.com. El modelo solo propone SQL; esta aplicación lo valida con
@@ -17,7 +16,6 @@ orador directo a la herramienta, sin pasar por el modelo.
 """
 from __future__ import annotations
 
-import argparse
 import json
 import os
 import sqlite3
@@ -145,15 +143,13 @@ TOOLS = [{
 }]
 
 
-def system_prompt(ddl: dict[str, str], desde: str | None) -> str:
+def system_prompt(ddl: dict[str, str]) -> str:
     tables = "\n\n".join(ddl[t] for t in sorted(ALLOWED_TABLES))
-    corte = f"Cuenta solo votos con poll_votes.created_at >= '{desde}' (UTC)." if desde else ""
     return (
         "Eres un agente de datos que responde preguntas sobre la encuesta de la charla "
         f"«AI en la banca» (grupo con poll_groups.code = '{GROUP_CODE}') usando la herramienta d1_query.\n"
         "Cada voter_hash es un navegador, no una persona; nunca lo muestres. "
-        "Una respuesta faltante no es un «No». No inventes números. "
-        f"{corte}\n"
+        "Una respuesta faltante no es un «No». No inventes números.\n"
         "Responde en español, breve, con una tabla compacta con numeradores y denominadores.\n\n"
         f"Tablas de la encuesta:\n{tables}"
     )
@@ -205,15 +201,11 @@ def load_api_key() -> None:
 
 def main() -> None:
     global SCHEMA
-    parser = argparse.ArgumentParser()
-    parser.add_argument("--desde", help="hora UTC 'YYYY-MM-DD HH:MM:SS'; ignora votos anteriores (p. ej. el ensayo)")
-    args = parser.parse_args()
-
     print(f"{DIM}cargando esquema de {DATABASE} vía wrangler…{RESET}", flush=True)
     SCHEMA, ddl = load_schema()
     load_api_key()
     client = anthropic.Anthropic()
-    system = system_prompt(ddl, args.desde)
+    system = system_prompt(ddl)
     messages: list = []
     print(f"{DIM}modelo {MODEL} · effort {EFFORT} · /sql <consulta> la escribes tú · Ctrl-D para salir{RESET}\n")
     while True:

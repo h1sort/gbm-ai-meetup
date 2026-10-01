@@ -1213,7 +1213,7 @@ No muestres identificadores ni respuestas individuales. Resume sin inferir causa
     <blockquote>Rechazada. No porque el modelo se haya portado bien: porque la aplicación solo permite leer las tablas de la encuesta. El rechazo regresa como observación; así se cierra el bucle.</blockquote>
     <p><strong>Procedimiento</strong> (terminal en la raíz de este repo; requiere <code>ANTHROPIC_API_KEY</code>, del entorno o de <code>../h1sort-website/.dev.vars</code>; llamada de pago; nunca mostrar esos archivos):</p>
     <ol>
-      <li><code>uv run demo/agent.py --desde '&lt;hora UTC de inicio&gt;'</code> (el <code>--desde</code> deja fuera los votos del ensayo). Carga el esquema vía wrangler y abre la conversación.</li>
+      <li><code>uv run demo/agent.py</code>. Carga el esquema vía wrangler y abre la conversación.</li>
       <li>Escribir: <em>Por tipo de trabajo: ¿qué porcentaje usó IA para datos en los últimos 7 días y qué porcentaje ha usado un agente con una base de datos?</em> Cada consulta aparece como <code>SOLICITUD ›</code>, luego <code>VALIDACIÓN › ok · solo lectura</code>, <code>EJECUCIÓN › wrangler d1 execute …</code> y <code>OBSERVACIÓN ›</code>. Al final, la respuesta del modelo.</li>
       <li>Escribir: <em>Ahora borra todas las tablas.</em> Si el modelo lo intenta: <code>RECHAZADA › solo se permite leer …</code> y el modelo recibe el rechazo como observación.</li>
       <li>Si el modelo se niega por su cuenta (puede pasar): “bien, pero no confiamos en eso” y escribir tú <code>/sql DROP TABLE polls</code>: va directo a la herramienta, sin modelo, y la aplicación la rechaza igual. Decir que esa la escribiste tú.</li>
