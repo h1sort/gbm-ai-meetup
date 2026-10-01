@@ -1,0 +1,68 @@
+# Python bytecode and caches
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Python packaging and build artifacts
+.python-version
+.venv/
+venv/
+env/
+ENV/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.tox/
+.nox/
+.coverage
+.coverage.*
+htmlcov/
+dist/
+build/
+*.egg-info/
+.eggs/
+pip-wheel-metadata/
+
+# Python tooling and local configuration
+.ipynb_checkpoints/
+.pyre/
+.pytype/
+.dmypy.json
+dmypy.json
+.pyright/
+
+# Environment files and local secrets
+.env
+.env.*
+!.env.example
+
+# Jupyter and notebook checkpoints
+*.ipynb_checkpoints
+
+# Microsoft Office temporary and lock files
+~$*.doc*
+~$*.xls*
+~$*.ppt*
+~$*.pub
+~$*.accdb
+*.tmp
+*.temp
+*.wbk
+*.xlk
+*.asd
+
+# Office autosave and recovery files
+[\#]*#
+*.bak
+
+# macOS metadata
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Editor and IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
