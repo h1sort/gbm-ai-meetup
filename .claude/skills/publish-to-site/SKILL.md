@@ -25,7 +25,7 @@ gbm-ai-meetup/og.jpg               ──copy──▶  h1sort-website/public/gb
    ```
    Open `localhost:8799/gbm-ai/?slide=5` in a browser: arrow keys advance, the footer shows `h1sort.com/gbm-ai`, there is no control bar in the bottom-right corner, and N, P and ? do nothing. Stop wrangler afterwards.
 5. **Commit only the deck paths.** Use `git add public/gbm-ai` (plus `astro.config.mjs` / `public/llms.txt` if they changed). **Never `git add -A`**: the site has unrelated untracked local files (`.devin/`, `src/data/arena-text-models.json`). Commit with a message like `Refresh AI en la banca deck (gbm-ai-meetup <sha>)`, push, then open a PR with `gh pr create`.
-6. **Merging deploys production.** Ask the speaker before merging. After the merge, check `curl -sI https://h1sort.com/gbm-ai/` and that the live page contains the new commit's change.
+6. **Any push deploys production, even before merging.** Workers Builds on h1sort-website currently deploys *every* branch push to production about 2.5 minutes later, not just `main` (seen 2026-10-01). Treat step 5's push as going live: run steps 3–4 first. Merge the PR so `main` matches what's live. To watch a deploy: `gh pr checks <n>` (the "Workers Builds" check) and `npx wrangler deployments list` in the site repo. Then confirm with `curl -s https://h1sort.com/gbm-ai/ | cmp - public/gbm-ai/index.html`.
 
 ## How it's mounted (and why)
 
@@ -51,3 +51,4 @@ Add a dated line here whenever a publish turns up something new.
 
 - 2026-10-01 · First mount. All routes worked as expected under `wrangler dev` with no surprises. Added `customPages` to the sitemap and a `llms.txt` entry. Converted the OG image from an 805 KB PNG to a 96 KB JPEG.
 - 2026-10-01 · Speaker asked that the live site not show the control bar or the notes. Added `public.mjs` (strips notes, sets `data-public`). The deck now has a public mode.
+- 2026-10-01 · Merged PR #18 (`4b53757`), deployed 15:14:51Z (`ea469eb5`). Live `/gbm-ai/` is byte-identical to `main`. Both earlier PR-branch pushes had already deployed to production (15:07, 15:11), so the route was live before the merge.
