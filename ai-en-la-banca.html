@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="es">
+<html lang="es" class="no-js">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -197,6 +197,7 @@
   .progress{position:fixed;z-index:60;left:0;top:0;height:2px;width:0;background:linear-gradient(90deg,transparent,var(--evidence) 50%,var(--action));transition:width .45s var(--ease)}
   .hud{position:fixed;z-index:61;right:clamp(.6rem,1.4vw,1.2rem);bottom:clamp(.5rem,1.2vh,.9rem);display:flex;gap:.35rem;opacity:0;transition:opacity .3s}
   body:hover .hud,.hud:focus-within{opacity:1}
+  @media (hover:none){.hud{opacity:.75}}
   .hud button{font:500 11px/1 var(--f-mono);letter-spacing:.1em;color:var(--ink-2);background:var(--paper-hi);border:1px solid var(--ink-faint);padding:.45em .6em;cursor:pointer}
   .overlay{position:fixed;z-index:80;display:none;background:var(--paper-hi);color:var(--ink);border:1px solid var(--ink-faint);box-shadow:0 30px 80px -30px rgba(23,56,47,.45);overflow:auto;overscroll-behavior:contain}
   .overlay.open{display:block}
@@ -241,6 +242,16 @@
   html[data-still] .dg .draw{stroke-dashoffset:0!important;animation:none!important;opacity:1!important}
   html[data-still] .dg .exec.draw,html[data-still] .dg .refuse.draw,html[data-still] .dg .wire.draw{stroke-dasharray:none!important}
   html[data-still] .dg .pulse{display:none}
+
+  /* ---------- no-JS fallback: plain vertical stack (class removed by the script) ---------- */
+  html.no-js body{overflow:auto}
+  html.no-js .deck{position:static}
+  html.no-js .slide{position:relative;opacity:1;visibility:visible;transform:none}
+  html.no-js .reveal,html.no-js [data-step]{opacity:1!important;transform:none!important;filter:none!important}
+  html.no-js .dg .draw{stroke-dashoffset:0!important}
+  html.no-js .dg .exec.draw,html.no-js .dg .refuse.draw,html.no-js .dg .wire.draw{stroke-dasharray:none!important}
+  html.no-js .dg .propose.draw,html.no-js .dg .return.draw,html.no-js .dg .rail.draw{opacity:1!important}
+  html.no-js .hud{display:none}
 
 
 /* --- 01-04.html --- */
@@ -531,6 +542,22 @@ html[data-still] .s04 .row{animation:none!important}
   .s18 .col{max-width:none}
 }
 
+/* --- 99-integrator.html --- */
+/* ===== integrator overrides after QA (build/qa-layout.md P1/P2) ===== */
+
+/* P1-4 history map: identical header + figure box on s05–s08 so the shared map never moves */
+.s05 h2,.s06 h2,.s07 h2,.s08 h2{min-height:2.04em}
+.s05 .figure,.s06 .figure,.s07 .figure,.s08 .figure{flex:0 0 auto;height:58vh}
+@media (max-height:650px){.s05 .figure,.s06 .figure,.s07 .figure,.s08 .figure{height:52vh}}
+@media (max-width:760px){.s05 h2,.s06 h2,.s07 h2,.s08 h2{min-height:0}.s05 .figure,.s06 .figure,.s07 .figure,.s08 .figure{height:auto;flex:1 1 auto}}
+
+/* P1-2 SVG labels >= 12px rendered at 1280 wide */
+.s03 .dg .t-mono{font-size:15px}
+.s05 .dg .t-mono,.s06 .dg .t-mono,.s07 .dg .t-mono,.s08 .dg .t-mono{font-size:13px}
+.s11 .dg .t-mono{font-size:14.5px}.s11 .dg .t-sub{font-size:15px}
+.s17 .dg .t-mono{font-size:12px}.s17 .dg .t-sub{font-size:13.5px}
+.s18 .dg .t-mono{font-size:15px}.s18 .dg .t-sub{font-size:16px}
+
   </style>
 </head>
 <body>
@@ -670,7 +697,7 @@ Cruza Q5 con Q1 y Q2 usando el identificador interno de navegador.
 Usa un denominador de pares válidos para cada porcentaje; no conviertas faltantes en No.
 Muestra el corte, SQL ejecutado y una tabla compacta con numeradores y denominadores.
 No muestres identificadores ni respuestas individuales. Resume sin inferir causalidad o competencia.</pre>
-    <p class="warn">Denominadores: el % de Q1 usa pares válidos Q5+Q1; el % de Q2 usa pares válidos Q5+Q2. Los faltantes no son “No” (la fila punteada del diagrama lo sugiere). Denominador cero = indefinido, no 0 %. Marcar como “muestra insuficiente” los trabajos con menos de 5 pares válidos. Q1 es uso reciente (7 días); Q2 es experiencia alguna vez: no son un embudo.</p>
+    <p class="warn">Denominadores: el % de Q1 usa pares válidos Q5+Q1; el % de Q2 usa pares válidos Q5+Q2. Los faltantes no son “No” (la fila punteada del diagrama lo sugiere). Denominador cero = indefinido, no 0 %. Marcar como “muestra insuficiente” los trabajos con muy pocos pares válidos (fijar el umbral en el ensayo). Q1 es uso reciente (7 días); Q2 es experiencia alguna vez: no son un embudo.</p>
     <p class="warn">Secuencia: Cloudflare (conteo manual) → entorno de agente preparado (SQL generado y ejecutado en vivo). El resultado real vive en ese entorno; la diapositiva no se conecta a la base de datos. Sin dashboard, reporte ni ETL. Conexión, esquema, grupo, permisos y modelo se preparan antes; la generación y ejecución del SQL son en vivo. Conteo y agente usan el mismo grupo y el mismo corte UTC fijo. Verificar el esquema real en el ensayo.</p>
     <p class="warn">Acceso limitado a las tablas de encuestas; no inspeccionar chats, mensajes ni autenticación (“SELECT-only” en el prompt no es autorización de solo lectura). Un voter_hash es un navegador, no una persona: nunca proyectarlo ni inferir el tamaño de la audiencia. Si la muestra es pequeña o vacía, no inventar hallazgos. Si falla la red o la cuota: grabación o snapshot del ensayo rotulado como tal; nunca fabricar votos, errores ni resultados.</p>
     <p><strong>Transición:</strong> “Rápido, sí. Pero rápido no es lo mismo que correcto. Resumamos lo que acaba de pasar.”</p>
@@ -724,7 +751,7 @@ No muestres identificadores ni respuestas individuales. Resume sin inferir causa
         </g>
         <g data-step="2">
           <path class="gw draw" pathLength="1" d="M220,75 C310,75 340,150 398,194"/>
-          <text class="t-lbl" x="238" y="38">Forma</text><text class="t-sub" x="296" y="38">eventos semi-estructurados</text><text class="t-sub" x="238" y="60">sin acceso práctico</text>
+          <text class="t-lbl" x="238" y="38">Forma</text><text class="t-sub" x="296" y="38">eventos semiestructurados</text><text class="t-sub" x="238" y="60">sin acceso práctico</text>
         </g>
         <g data-step="3">
           <text class="t-lbl" x="400" y="298">Escala</text><text class="t-sub" x="460" y="298">cargas que compiten con la operación</text>
@@ -739,7 +766,7 @@ No muestres identificadores ni respuestas individuales. Resume sin inferir causa
     <blockquote>Las solicitudes están en un sistema. Los movimientos, en otro. Los eventos de la aplicación quizá no están disponibles para análisis. Cruzar esa información requiere extracciones, coordinación y recursos que pueden competir con la operación.</blockquote>
     <blockquote>No nos faltaban preguntas. Nos faltaba una forma práctica de reunir la evidencia para responderlas. La infraestructura decidía qué preguntas podíamos permitirnos hacer.</blockquote>
     <p class="warn">“Fases aproximadas” se dice aquí (una vez). Arquitectura representativa: decir “impráctico o costoso en este entorno representativo”, no “imposible en todos lados”; no decir que no existían warehouses ni sistemas distribuidos. Sin villano DBA: mostramos aislamiento, no bloqueo humano.</p>
-    <p>→ paso 1: Fragmentación (evidencia en sistemas separados, extracción costosa). → paso 2: Forma (eventos semi-estructurados). → paso 3: Escala (cargas que compiten con la operación). La barra al final de “Reporte” marca dónde terminaba el trayecto: contrastar con 2020.</p>
+    <p>→ paso 1: Fragmentación (evidencia en sistemas separados, extracción costosa). → paso 2: Forma (eventos semiestructurados). → paso 3: Escala (cargas que compiten con la operación). La barra al final de “Reporte” marca dónde terminaba el trayecto: contrastar con 2020.</p>
     <p><strong>Transición:</strong> “Con los años, la infraestructura cambió qué tanto del negocio podíamos observar.”</p>
   </aside>
 </section>
@@ -770,7 +797,7 @@ No muestres identificadores ni respuestas individuales. Resume sin inferir causa
     <blockquote>Ahora podemos reconstruir una parte mucho más completa del recorrido: solicitud, actividad y primer fondeo.</blockquote>
     <blockquote>Pero ojo: tener los datos juntos no significa que ya acordamos qué significan.</blockquote>
     <p class="warn">No decir “cómputo/almacenamiento infinito”, verdad única automática, que todos los warehouses son idénticos, ni que un proveedor inventó los warehouses en la nube. El rectángulo punteado interior es el alcance de ~2013. Reporte sigue siendo el final del análisis: el cambio es de alcance.</p>
-    <p>→ paso 1: plano analítico + fuentes conectadas. → paso 2: alcance ampliado a las tres fuentes. → paso 3: carga analítica aislada de la operación. (Se unieron dos pasos del copy a tres para respetar el máximo.)</p>
+    <p>→ paso 1: plano analítico + fuentes conectadas. → paso 2: alcance ampliado a las tres fuentes. → paso 3: carga analítica aislada de la operación.</p>
     <p><strong>Transición:</strong> “Y una vez que podíamos ver más, la siguiente pregunta fue: ¿podemos hacer algo con lo que vemos?”</p>
   </aside>
 </section>
@@ -819,7 +846,7 @@ No muestres identificadores ni respuestas individuales. Resume sin inferir causa
 <rect class="node" x="20" y="190" width="200" height="70" rx="4"/><text class="t-lbl" x="38" y="221">Solicitudes</text><text class="t-sub" x="38" y="242">originación</text>
 <rect class="node" x="20" y="340" width="200" height="70" rx="4"/><text class="t-lbl" x="38" y="371">Movimientos</text><text class="t-sub" x="38" y="392">fondeo, operación</text>
         <path class="wire draw" pathLength="1" d="M220,225 H396" marker-end="url(#arr)"/><path class="wire draw" pathLength="1" d="M220,75 H378" marker-end="url(#arr)"/><path class="wire draw" pathLength="1" d="M220,375 H378" marker-end="url(#arr)"/>
-        <rect class="plane" x="380" y="30" width="260" height="390" rx="14"/><text class="t-mono" x="398" y="58">Plano analítico en la nube</text>
+        <rect class="plane" x="380" y="30" width="260" height="390" rx="14"/><text class="t-mono" x="398" y="58">Plano analítico</text>
         <rect class="node ev" x="262" y="40" width="96" height="370" rx="10"/><text class="t-lbl" x="310" y="130" text-anchor="middle">Ingesta</text><text class="t-sub" x="310" y="152" text-anchor="middle">administrada</text>
         <path class="exec big draw flow" pathLength="1" d="M640,375 H896" marker-end="url(#arr-ev)"/><text class="t-lbl t-ev" x="676" y="352">Reverse ETL</text><text class="t-sub" x="676" y="402">segmentación → acción</text><rect class="node act" x="900" y="340" width="190" height="70" rx="4"/><text class="t-lbl" x="918" y="371">CRM · proceso</text><text class="t-sub" x="918" y="392">operativo (representativo)</text>
         <g data-step="1">
@@ -851,7 +878,7 @@ No muestres identificadores ni respuestas individuales. Resume sin inferir causa
     <blockquote>Ahora el problema no es únicamente producir respuestas. Es conseguir que esas respuestas conserven las definiciones y el conocimiento del negocio.</blockquote>
     <blockquote>El nuevo apalancamiento: convertir el criterio de los expertos en infraestructura que otros puedan usar sin tener al experto presente.</blockquote>
     <p class="warn">Macomber se cita discreto y adaptado (“Adaptado de…”), no copiado; la síntesis “criterio como infraestructura” es del ponente. El stack post-IA no elimina warehouses, ETL, modelado ni gobernanza; los hace más valiosos. No usar “asume que los modelos nunca se equivocan”, “cómputo infinito” ni consenso como prueba. Si hay que ir rápido: conservar fragmentación y la transición de 2020.</p>
-    <p>→ paso 1: varias interfaces (persona, agente, interfaz) + harness. → paso 2: contexto compartido (definiciones, procedencia). → paso 3: las correcciones regresan. (El copy tenía 4 pasos; se fusionó interfaces + harness para el máximo de 3.)</p>
+    <p>→ paso 1: varias interfaces (persona, agente, interfaz) + harness. → paso 2: contexto compartido (definiciones, procedencia). → paso 3: las correcciones regresan.</p>
     <p><strong>Transición:</strong> “Hasta ahora vimos lo que el agente produjo. ¿Qué tuvimos que construir para que pudiera hacerlo?”</p>
   </aside>
 </section>
@@ -1035,7 +1062,7 @@ No muestres identificadores ni respuestas individuales. Resume sin inferir causa
     <blockquote>Hace un momento viste la capacidad. Ahora quiero que veas el mecanismo.</blockquote>
     <blockquote>Esta es la solicitud real. Todavía no pasó nada: el efecto no existe.</blockquote>
     <blockquote>Esta es la implementación, el código que sí se ejecuta. Y esta es la observación que regresa al modelo.</blockquote>
-    <p><strong>Procedimiento (facts.md §2.2).</strong> Mismo mecanismo, <em>otro dataset</em>: taxis NYC de la clase 3; sin red, sin D1 ni Databricks, sin afirmación bancaria. Decirlo en voz alta. Requiere <code>ANTHROPIC_API_KEY</code> (llamada de pago; nunca mostrar <code>.dev.vars</code>). <strong>Ensayar una vez antes.</strong></p>
+    <p><strong>Procedimiento.</strong> Mismo mecanismo, <em>otro dataset</em>: taxis NYC de la clase 3; sin red, sin D1 ni Databricks, sin afirmación bancaria. Decirlo en voz alta. Requiere <code>ANTHROPIC_API_KEY</code> (llamada de pago; nunca mostrar <code>.dev.vars</code>). <strong>Ensayar una vez antes.</strong></p>
     <ol>
       <li>Terminal en <code>/Users/Haro/Code/ai4data-class</code>: <code>uv run --with langchain-anthropic --with langchain-core --with duckdb python -m pdb demos/clase-03/agent/agent.py "¿Cuántos viajes hay en el dataset de taxis?"</code>, luego <code>b demos/clase-03/agent/agent.py:70</code> y <code>c</code>.</li>
       <li>El proceso se detiene en L70, después de imprimirse la línea real <code>TOOL REQUEST &gt;</code> (L68). <code>p call</code> muestra la solicitud del modelo. Eso es “pendiente”: la solicitud existe, el efecto no. Decir “pausamos el proceso”, nunca “aprobación”: <code>agent.py</code> no tiene pausa de aprobación; el pdb es solo un depurador.</li>
@@ -1265,7 +1292,7 @@ No muestres identificadores ni respuestas individuales. Resume sin inferir causa
       </div>
     </div>
     <div class="figure fill reveal d2">
-      <svg class="dg" viewBox="0 0 1100 446" role="img" aria-label="Caso ilustrativo de ejecución. El cliente pide bloquear su tarjeta; el modelo solo propone una operación acotada (línea punteada). Una compuerta de política y validación verifica identidad, autorización y objetivo válido; si falla, la operación es bloqueada sin efecto. Si pasa, una aprobación cuando el riesgo lo exige (que no concede autoridad nueva) precede a la ejecución idempotente en el sistema autoritativo, que devuelve un recibo. Si la ejecución da timeout, se concilia consultando el estado antes de reintentar. Un riel de auditoría, idempotencia y conciliación recorre el proceso.">
+      <svg class="dg" viewBox="0 0 1100 446" role="img" aria-label="Caso ilustrativo de ejecución. El cliente pide bloquear su tarjeta; el modelo solo propone una operación acotada (línea punteada). Una compuerta de política y validación verifica identidad, autorización y objetivo válido; si falla, la operación es rechazada sin efecto. Si pasa, una aprobación cuando el riesgo lo exige (que no concede autoridad nueva) precede a la ejecución idempotente en el sistema autoritativo, que devuelve un recibo. Si la ejecución da timeout, se concilia consultando el estado antes de reintentar. Un riel de auditoría, idempotencia y conciliación recorre el proceso.">
         <g data-step="1">
           <rect class="node" x="20" y="150" width="100" height="80" rx="4"/>
           <text class="t-lbl" x="34" y="184">Cliente</text><text class="t-sub" x="34" y="206">sesión</text>
@@ -1283,7 +1310,7 @@ No muestres identificadores ni respuestas individuales. Resume sin inferir causa
           <text class="t-sub" x="451" y="68" text-anchor="middle">identidad · autorización · objetivo válido</text>
           <rect class="gate" x="440" y="100" width="22" height="200" rx="2"/>
           <path class="refuse draw" pathLength="1" d="M451,300 V346" marker-end="url(#bar-act)"/>
-          <text class="t-sub t-act" x="466" y="328" font-weight="700">✕ bloqueada</text>
+          <text class="t-sub t-act" x="466" y="328" font-weight="700">✕ rechazada</text>
           <text class="t-sub" x="451" y="372" text-anchor="middle">sin efecto</text>
         </g>
 
@@ -1327,7 +1354,7 @@ No muestres identificadores ni respuestas individuales. Resume sin inferir causa
     <blockquote>El fallo típico: la operación correcta sobre la tarjeta equivocada, o dos ejecuciones porque la primera terminó en timeout.</blockquote>
     <blockquote>Por eso hace falta idempotencia, y reconciliar antes de reintentar: primero averiguar qué pasó, luego decidir.</blockquote>
     <blockquote>Una respuesta equivocada y una acción equivocada son problemas distintos.</blockquote>
-    <p>→ 1: petición y propuesta acotada (línea punteada: aún no es un efecto). → 2: compuerta de política y validación; rechazo «bloqueada». → 3: aprobación donde aplique, ejecución en el sistema autoritativo. → 4: recibo; rama de timeout que concilia el estado antes de reintentar; riel de auditoría, idempotencia y conciliación.</p>
+    <p>→ 1: petición y propuesta acotada (línea punteada: aún no es un efecto). → 2: compuerta de política y validación; rechazo «rechazada». → 3: aprobación donde aplique, ejecución en el sistema autoritativo. → 4: recibo; rama de timeout que concilia el estado antes de reintentar; riel de auditoría, idempotencia y conciliación.</p>
     <p class="warn">La aprobación no otorga autoridad que el usuario no tiene. No toda lectura u operación reversible exige aprobación humana. Idempotencia y conciliación en lenguaje llano: la misma orden dos veces produce un solo efecto; ante un resultado incierto, primero se consulta qué ocurrió. No se ejecuta ninguna acción bancaria real. Un checkpoint no es idempotencia.</p>
     <p><strong>Transición:</strong> “Y hay casos donde ni siquiera pedimos una acción, sino una evaluación.”</p>
   </aside>
@@ -1440,7 +1467,7 @@ No muestres identificadores ni respuestas individuales. Resume sin inferir causa
     </div>
     <p class="formula reveal d1">Estado + preguntas tipadas <i>→</i> valores + probabilidades <i>→</i> código</p>
     <div class="figure fill reveal d2">
-      <svg class="dg" viewBox="0 0 1100 446" role="img" aria-label="Ilustración sintética, sin resultados medidos. Dentro de la frontera de la aplicación, el estado (el texto libre «gerente de analítica») y una pregunta tipada con seis categorías predefinidas entran a una única llamada a Jev, un componente y no un agente. Regresan valores y probabilidades (sin cifras) al código de la aplicación, que agrega con SQL ordinario y enruta o revisa según su política. Una categoría válida no necesariamente es correcta.">
+      <svg class="dg" viewBox="0 0 1100 476" role="img" aria-label="Ilustración sintética, sin resultados medidos. Dentro de la frontera de la aplicación, el estado (el texto libre «gerente de analítica») y una pregunta tipada con seis categorías predefinidas entran a una única llamada a Jev, un componente y no un agente. Regresan valores y probabilidades (sin cifras) al código de la aplicación, que agrega con SQL ordinario y enruta o revisa según su política. Una categoría válida no necesariamente es correcta.">
         <rect class="app" x="8" y="34" width="1084" height="376" rx="6"/>
         <text class="t-title" x="26" y="64">Aplicación · frontera de código</text>
 
@@ -1486,7 +1513,7 @@ No muestres identificadores ni respuestas individuales. Resume sin inferir causa
           <rect class="node act" x="908" y="120" width="172" height="250" rx="4"/>
           <text class="t-lbl" x="922" y="150">Código de la</text><text class="t-lbl" x="922" y="170">aplicación</text>
           <text class="t-sub" x="922" y="204">agrega con SQL</text>
-          <text class="t-mono" x="922" y="226" style="font-size:11px">GROUP BY categoría</text>
+          <text class="t-mono" x="922" y="226" style="font-size:12px">GROUP BY categoría</text>
           <text class="t-sub" x="922" y="266">enruta o revisa</text>
           <text class="t-sub" x="922" y="286">según la política</text>
           <text class="t-sub t-ev" x="922" y="330" font-weight="700">SQL cuenta</text>
@@ -1540,7 +1567,8 @@ No muestres identificadores ni respuestas individuales. Resume sin inferir causa
   <div class="main">
     <div class="col">
       <p class="eyebrow reveal">Hoy y mañana</p>
-      <h2 class="reveal d1">Que el significado y las consecuencias <em>no se pierdan.</em></h2>
+      <p class="lede reveal d1">El análisis se abarató. Nuestro trabajo:</p>
+      <h2 class="reveal d2">Que el significado y las consecuencias <em>no se pierdan.</em></h2>
       <p class="url reveal d3">h1sort.com</p>
     </div>
   </div>
@@ -1553,6 +1581,9 @@ No muestres identificadores ni respuestas individuales. Resume sin inferir causa
     <p><strong>Transición:</strong> ninguna. Fin. Pasar a preguntas.</p>
   </aside>
 </section>
+
+<!-- ===== 99-integrator.html ===== -->
+
 
   </main>
 
@@ -1682,6 +1713,7 @@ No muestres identificadores ni respuestas individuales. Resume sin inferir causa
   (() => {
     const params = new URLSearchParams(location.search);
     const root = document.documentElement;
+    root.classList.remove('no-js');
     const still = params.get('still') === '1';
     const presenter = params.get('presenter') === '1';
     if (still) root.dataset.still = '1';
@@ -1713,7 +1745,7 @@ No muestres identificadores ni respuestas individuales. Resume sin inferir causa
       s.insertBefore(bottom, notes || null);
       s.id = s.id || 'slide-' + (i + 1);
       s.setAttribute('aria-label', (i + 1) + ' de ' + total + ': ' + (s.dataset.title || ''));
-      s.steps = Math.max(0, ...[...s.querySelectorAll('[data-step]')].map(el => +el.dataset.step || 0));
+      s.steps = reduced ? 0 : Math.max(0, ...[...s.querySelectorAll('[data-step]')].map(el => +el.dataset.step || 0));   /* reduced motion: no in-slide builds, everything visible */
       s.step = 0;
     });
 
@@ -1737,10 +1769,10 @@ No muestres identificadores ni respuestas individuales. Resume sin inferir causa
 
     /* elements are "on" (draw animations run) when the slide is active and their step is reached */
     const applyStep = s => {
-      s.querySelectorAll('[data-step]').forEach(el => el.classList.toggle('shown', still || +el.dataset.step <= s.step));
+      s.querySelectorAll('[data-step]').forEach(el => el.classList.toggle('shown', reduced || +el.dataset.step <= s.step));
       s.querySelectorAll('.draw, .pulse').forEach(el => {
         const host = el.closest('[data-step]');
-        el.classList.toggle('on', still || !host || +host.dataset.step <= s.step);
+        el.classList.toggle('on', reduced || !host || +host.dataset.step <= s.step);
       });
     };
 
@@ -1837,14 +1869,16 @@ No muestres identificadores ni respuestas individuales. Resume sin inferir causa
     });
 
     if (!still && !presenter) {
-      let locked = false, startX = 0, startY = 0;
+      let locked = false, lockedAt = 0, idle = null, startX = 0, startY = 0;
       addEventListener('wheel', e => {
         if (e.target.closest('.overlay')) return;          /* notes/sources stay scrollable */
         e.preventDefault();
+        /* one step per gesture: stay locked until trackpad inertia has been quiet for 220ms (min 650ms) */
+        clearTimeout(idle);
+        idle = setTimeout(() => { if (Date.now() - lockedAt > 650) locked = false; else setTimeout(() => locked = false, 650 - (Date.now() - lockedAt)); }, 220);
         if (locked || Math.abs(e.deltaY) + Math.abs(e.deltaX) < 14) return;
-        locked = true;
+        locked = true; lockedAt = Date.now();
         (e.deltaY || e.deltaX) > 0 ? next() : prev();
-        setTimeout(() => locked = false, 650);
       }, { passive: false });
       addEventListener('touchstart', e => { if (e.target.closest('.overlay')) return; startX = e.touches[0].clientX; startY = e.touches[0].clientY; }, { passive: true });
       addEventListener('touchend', e => {
